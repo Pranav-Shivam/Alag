@@ -1,0 +1,197 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+/* Dark mode is driven by a `.dark` class on <html> (set by src/lib/theme.ts). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Semantic color tokens. Components use these names (bg-surface, text-ink, bg-ok-soft ...)
+ * and never hardcode light-only colors, so light and dark both come from the values below.
+ */
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-on-accent: var(--on-accent);
+  --color-ring: var(--ring);
+
+  --color-ok-soft: var(--ok-soft);
+  --color-ok-fg: var(--ok-fg);
+  --color-ok-line: var(--ok-line);
+  --color-ok-solid: var(--ok-solid);
+
+  --color-warn-soft: var(--warn-soft);
+  --color-warn-fg: var(--warn-fg);
+  --color-warn-line: var(--warn-line);
+  --color-warn-solid: var(--warn-solid);
+
+  --color-alert-soft: var(--alert-soft);
+  --color-alert-fg: var(--alert-fg);
+  --color-alert-line: var(--alert-line);
+  --color-alert-solid: var(--alert-solid);
+
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-fg: var(--danger-fg);
+  --color-danger-line: var(--danger-line);
+  --color-danger-solid: var(--danger-solid);
+
+  --color-info-soft: var(--info-soft);
+  --color-info-fg: var(--info-fg);
+  --color-info-line: var(--info-line);
+  --color-info-solid: var(--info-solid);
+
+  --color-violet-soft: var(--violet-soft);
+  --color-violet-fg: var(--violet-fg);
+  --color-violet-line: var(--violet-line);
+  --color-violet-solid: var(--violet-solid);
+
+  --color-teal-soft: var(--teal-soft);
+  --color-teal-fg: var(--teal-fg);
+  --color-teal-line: var(--teal-line);
+  --color-teal-solid: var(--teal-solid);
+}
+
+:root {
+  color-scheme: light;
+
+  --canvas: #faf9f7;
+  --surface: #ffffff;
+  --surface-2: #f5f4f2;
+  --line: #e7e5e4;
+  --line-strong: #d6d3d1;
+  --ink: #1c1917;
+  --ink-2: #44403c;
+  --muted: #6b645f;
+  --accent: #92400e;
+  --accent-hover: #78350f;
+  --accent-fg: #92400e;
+  --on-accent: #ffffff;
+  --ring: #d97706;
+
+  --ok-soft: #ecfdf5;
+  --ok-fg: #065f46;
+  --ok-line: #86efac;
+  --ok-solid: #047857;
+
+  --warn-soft: #fffbeb;
+  --warn-fg: #92400e;
+  --warn-line: #fcd34d;
+  --warn-solid: #b45309;
+
+  --alert-soft: #fff7ed;
+  --alert-fg: #9a3412;
+  --alert-line: #fdba74;
+  --alert-solid: #c2410c;
+
+  --danger-soft: #fef2f2;
+  --danger-fg: #991b1b;
+  --danger-line: #fca5a5;
+  --danger-solid: #b91c1c;
+
+  --info-soft: #eff6ff;
+  --info-fg: #1e40af;
+  --info-line: #93c5fd;
+  --info-solid: #1d4ed8;
+
+  --violet-soft: #f5f3ff;
+  --violet-fg: #5b21b6;
+  --violet-line: #c4b5fd;
+  --violet-solid: #6d28d9;
+
+  --teal-soft: #f0fdfa;
+  --teal-fg: #115e59;
+  --teal-line: #5eead4;
+  --teal-solid: #0f766e;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --canvas: #0f0e0d;
+  --surface: #1a1816;
+  --surface-2: #221f1c;
+  --line: #2f2b28;
+  --line-strong: #453f3a;
+  --ink: #f5f4f2;
+  --ink-2: #d6d3d1;
+  --muted: #a8a29e;
+  --accent: #b45309;
+  --accent-hover: #c2610f;
+  --accent-fg: #fbbf24;
+  --on-accent: #ffffff;
+  --ring: #f59e0b;
+
+  --ok-soft: rgb(16 185 129 / 0.14);
+  --ok-fg: #6ee7b7;
+  --ok-line: rgb(16 185 129 / 0.4);
+  --ok-solid: #059669;
+
+  --warn-soft: rgb(245 158 11 / 0.14);
+  --warn-fg: #fcd34d;
+  --warn-line: rgb(245 158 11 / 0.4);
+  --warn-solid: #d97706;
+
+  --alert-soft: rgb(249 115 22 / 0.14);
+  --alert-fg: #fdba74;
+  --alert-line: rgb(249 115 22 / 0.4);
+  --alert-solid: #ea580c;
+
+  --danger-soft: rgb(239 68 68 / 0.15);
+  --danger-fg: #fca5a5;
+  --danger-line: rgb(239 68 68 / 0.4);
+  --danger-solid: #dc2626;
+
+  --info-soft: rgb(59 130 246 / 0.15);
+  --info-fg: #93c5fd;
+  --info-line: rgb(59 130 246 / 0.4);
+  --info-solid: #2563eb;
+
+  --violet-soft: rgb(139 92 246 / 0.16);
+  --violet-fg: #c4b5fd;
+  --violet-line: rgb(139 92 246 / 0.4);
+  --violet-solid: #7c3aed;
+
+  --teal-soft: rgb(20 184 166 / 0.14);
+  --teal-fg: #5eead4;
+  --teal-line: rgb(20 184 166 / 0.4);
+  --teal-solid: #0d9488;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* One consistent keyboard focus ring for every interactive element. */
+:where(a, button, select, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
