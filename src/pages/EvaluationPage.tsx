@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Gauge, ListChecks, Scale, FlaskConical } from "lucide-react";
-import { Segmented } from "../components/ui";
+import { PageHeader, Segmented } from "../components/ui";
 import Runs from "../components/evaluation/Runs";
 import Scoreboard from "../components/evaluation/Scoreboard";
 import ScoringRules from "../components/evaluation/ScoringRules";
@@ -56,13 +56,13 @@ export default function EvaluationPage() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-7xl min-w-0">
-      <header>
-        <h1 className="text-xl font-semibold tracking-tight text-ink">Evaluation and observability</h1>
-        <p className="mt-1 max-w-3xl text-sm text-muted">Every agent run is recorded as a trajectory and judged against its written Behavior Spec, so reliability is measured by rules followed and not by runs completed.</p>
-      </header>
+    <div className="page">
+      <PageHeader
+        title="Evaluation and observability"
+        description="Every agent run is recorded as a trajectory and judged against its written Behavior Spec, so reliability is measured by rules followed and not by runs completed."
+      />
 
-      <div className="mt-4 max-w-full">
+      <div className="max-w-full">
         <Segmented
           label="Evaluation sections"
           value={tab}
@@ -76,7 +76,7 @@ export default function EvaluationPage() {
         />
       </div>
 
-      <div className="mt-5 min-w-0">
+      <div className="min-w-0">
         {tab === "scoreboard" && <Scoreboard scored={scored} runs={runs} rules={rules} scoring={scoring} onOpenAgent={openAgent} />}
         {tab === "runs" && <Runs scored={scored} rules={rules} scoring={scoring} filters={filters} setFilters={setFilters} selectedId={selectedId} onSelect={setSelectedId} />}
         {tab === "rules" && <ScoringRules runs={runs} rules={rules} scored={scored} scoring={scoring} />}

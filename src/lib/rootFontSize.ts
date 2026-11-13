@@ -1,7 +1,7 @@
 /**
- * Esti-360 scales the root font size with the viewport diagonal, using a 1920x834 viewport as the 16px reference,
- * so every rem value in the UI scales together. Same rule here, with two limits Esti does not need because it is
- * desktop-only: no scaling below 1024px wide, and the size stays between 15px and 20px so text stays readable.
+ * The root font size scales with the viewport diagonal, using a 1920x834 viewport as the 16px reference,
+ * so every rem value in the UI scales together. Two limits keep it usable on small screens:
+ * no scaling below 1024px wide, and the size stays between 15px and 20px so text stays readable.
  */
 const BASE = 16;
 const MIN = 15;

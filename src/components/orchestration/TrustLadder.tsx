@@ -17,7 +17,7 @@ export default function TrustLadder({ rows, onOpen }: { rows: AgentRow[]; onOpen
           const meta = AUTONOMY_META[level];
           const members = rows.filter((r) => r.body.autonomy === level);
           return (
-            <section key={level} aria-labelledby={`ladder-${level}`} className="min-w-0 rounded-xl border border-line bg-surface-2 p-3">
+            <section key={level} aria-labelledby={`ladder-${level}`} className="min-w-0 rounded-surface border border-line bg-surface-2 p-3">
               <header className="mb-2 flex items-center justify-between gap-2">
                 <h4 id={`ladder-${level}`} className="flex items-center gap-1.5 text-sm font-semibold text-ink">
                   <meta.icon className="h-4 w-4" aria-hidden="true" />
@@ -29,7 +29,7 @@ export default function TrustLadder({ rows, onOpen }: { rows: AgentRow[]; onOpen
               </header>
               <p className="mb-2 text-xs text-muted">{meta.blurb}</p>
               {members.length === 0 ? (
-                <p className="rounded-lg border border-dashed border-line-strong p-3 text-xs text-muted">No agent is at this level.</p>
+                <p className="rounded-control border border-dashed border-line-strong p-3 text-xs text-muted">No agent is at this level.</p>
               ) : (
                 <ul className="space-y-1.5">
                   {members.map((r) => {
@@ -40,7 +40,7 @@ export default function TrustLadder({ rows, onOpen }: { rows: AgentRow[]; onOpen
                         <button
                           type="button"
                           onClick={() => onOpen(r.step.id)}
-                          className="flex w-full items-center gap-2 rounded-lg border border-line bg-surface px-2.5 py-1.5 text-left text-sm text-ink transition-colors hover:border-line-strong"
+                          className="flex w-full items-center gap-2 rounded-control border border-line bg-surface px-2.5 py-1.5 text-left text-sm text-ink transition-colors hover:border-line-strong"
                         >
                           <StepBadge id={r.step.id} />
                           <span className="min-w-0 flex-1 truncate">{r.step.agent}</span>

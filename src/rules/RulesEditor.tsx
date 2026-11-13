@@ -66,7 +66,7 @@ export default function RulesEditor({ focus }: RulesTabProps) {
   return (
     <div className="@container space-y-4">
       {/* Sticky top bar */}
-      <div className="sticky top-0 z-20 space-y-2 rounded-xl border border-line bg-surface/95 p-3 shadow-xs backdrop-blur">
+      <div className="sticky top-0 z-20 space-y-2 rounded-surface border border-line bg-surface/95 p-3 shadow-surface backdrop-blur">
         <div className="flex flex-wrap items-center gap-2">
           <Chip tone="ok" icon={CircleCheck}>
             Live rules version {state.version}
@@ -95,7 +95,7 @@ export default function RulesEditor({ focus }: RulesTabProps) {
           </div>
         </div>
         {draft && problems.length > 0 ? (
-          <div id="rules-problems" role="alert" className="rounded-lg border border-danger-line bg-danger-soft p-2.5 text-xs text-danger-fg">
+          <div id="rules-problems" role="alert" className="rounded-control border border-danger-line bg-danger-soft p-2.5 text-xs text-danger-fg">
             <div className="font-semibold">Fix {problems.length === 1 ? "this problem" : `these ${problems.length} problems`} to publish</div>
             <ul className="mt-1 list-disc space-y-0.5 pl-4">
               {problems.map((p) => (

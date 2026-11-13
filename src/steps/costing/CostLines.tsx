@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
-import { AlertTriangle, BookOpen, Building2, Factory, Hammer, HardHat, PaintBucket, Pencil, PenLine, RotateCcw, Trash2, TreePine, Truck, Wrench } from "lucide-react";
+import { AlertTriangle, BookOpen, Building2, Factory, Hammer, HardHat, Package, PaintBucket, Pencil, PenLine, RotateCcw, Trash2, Truck, Wrench } from "lucide-react";
 import { Button, Card, Chip } from "../../components/ui";
 import type { Tone } from "../../components/ui";
 import { lineCalcTotal, lineDelta, lineQty, lineTotal, lineUnitPrice, usd } from "../../studio/calc";
@@ -16,8 +16,8 @@ export interface CostActions {
   remove: (line: BomLine) => void;
 }
 
-const CATEGORY_ICON: Record<BomCategory, typeof TreePine> = {
-  wood: TreePine,
+const CATEGORY_ICON: Record<BomCategory, typeof Package> = {
+  material: Package,
   labour: Hammer,
   manufacturing: Factory,
   finishing: PaintBucket,
@@ -117,7 +117,7 @@ function LineRow({ line, editing, onEdit, actions }: { line: BomLine; editing: b
       </div>
 
       {o ? (
-        <dl className="mt-2 grid gap-x-3 gap-y-1 rounded-lg border border-line bg-surface-2 p-2.5 text-xs text-ink-2 @md:grid-cols-[auto_minmax(0,1fr)]">
+        <dl className="mt-2 grid gap-x-3 gap-y-1 rounded-control border border-line bg-surface-2 p-2.5 text-xs text-ink-2 @md:grid-cols-[auto_minmax(0,1fr)]">
           <dt className="text-muted">Calculated</dt>
           <dd className="tabular-nums">
             {fmtQty(line.calcQty)} {line.unit} at {usd(line.calcUnitPrice, 2)} = {usd(lineCalcTotal(line), 2)}
@@ -150,12 +150,12 @@ function LineRow({ line, editing, onEdit, actions }: { line: BomLine; editing: b
   );
 }
 
-export default function CostLines({ lines, actions }: { lines: BomLine[]; actions: CostActions }) {
+export default function CostLines({ lines, actions, categories = CATEGORY_ORDER }: { lines: BomLine[]; actions: CostActions; categories?: BomCategory[] }) {
   const [editingId, setEditingId] = useState<string | null>(null);
 
   return (
     <div className="space-y-3">
-      {CATEGORY_ORDER.map((cat) => {
+      {categories.map((cat) => {
         const group = lines.filter((l) => l.category === cat);
         if (group.length === 0) return null;
         const Icon = CATEGORY_ICON[cat];
@@ -163,7 +163,7 @@ export default function CostLines({ lines, actions }: { lines: BomLine[]; action
         return (
           <Card key={cat} className="overflow-hidden">
             <div className="flex items-center justify-between gap-3 border-b border-line bg-surface-2 px-3 py-2">
-              <h3 className="flex items-center gap-2 text-sm font-semibold text-ink">
+              <h3 className="t-label flex items-center gap-2">
                 <Icon className="h-4 w-4 text-muted" aria-hidden="true" />
                 {CATEGORY_LABEL[cat]}
                 <span className="text-xs font-normal text-muted">

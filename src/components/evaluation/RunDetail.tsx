@@ -66,12 +66,12 @@ export default function RunDetail({ item, rules, scoring, onClose }: Props) {
         aria-modal="true"
         aria-label={`Run ${run.id}`}
         tabIndex={-1}
-        className="fixed inset-x-0 bottom-0 z-50 flex max-h-[92vh] flex-col rounded-t-2xl border-t border-line bg-surface shadow-xl outline-none lg:inset-y-0 lg:left-auto lg:right-0 lg:max-h-none lg:w-[46rem] lg:max-w-[100vw] lg:rounded-none lg:border-l lg:border-t-0"
+        className="fixed inset-x-0 bottom-0 z-50 flex max-h-[92vh] flex-col rounded-t-surface border-t border-line bg-surface shadow-raised outline-none lg:inset-y-0 lg:left-auto lg:right-0 lg:max-h-none lg:w-[46rem] lg:max-w-[100vw] lg:rounded-none lg:border-l lg:border-t-0"
       >
         <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="truncate text-base font-semibold text-ink">{run.agentName}</h2>
+              <h2 className="t-section truncate">{run.agentName}</h2>
               <StatusChip status={run.status} />
             </div>
             <p className="mt-0.5 text-xs text-muted">
@@ -136,7 +136,7 @@ function Breakdown({ item, rules, scoring }: { item: ScoredRun; rules: SpecRule[
           {/* Narrow: one card per rule */}
           <ul className="mt-3 space-y-2 sm:hidden">
             {rows.map((r) => (
-              <li key={r.check.ruleId} className="rounded-lg border border-line p-3">
+              <li key={r.check.ruleId} className="rounded-control border border-line p-3">
                 <div className="text-sm font-medium text-ink">{r.rule?.title ?? r.check.ruleId}</div>
                 <div className="mt-1.5 flex flex-wrap gap-1.5">
                   {r.rule ? <SeverityChip severity={r.rule.severity} /> : null}
@@ -226,7 +226,7 @@ function Timeline({ item }: { item: ScoredRun }) {
   return (
     <section aria-label="Trajectory">
       <SectionTitle title="Trajectory" hint="Everything the agent did in this run, in order. Bars are scaled to the slowest step." />
-      <dl className="mt-3 grid grid-cols-2 gap-2 rounded-lg border border-line bg-surface-2 p-3 text-xs sm:grid-cols-3">
+      <dl className="mt-3 grid grid-cols-2 gap-2 rounded-control border border-line bg-surface-2 p-3 text-xs sm:grid-cols-3">
         {summary.map(([k, v]) => (
           <div key={k} className="min-w-0">
             <dt className="text-muted">{k}</dt>
@@ -261,7 +261,7 @@ function TimelineStep({ step, longest }: { step: TrajectoryStep; longest: number
       <span className={`absolute -left-[2.35rem] top-2.5 grid h-6 w-6 place-items-center rounded-full border bg-surface ${TONE[tone]}`}>
         <Icon className="h-3.5 w-3.5" aria-hidden="true" />
       </span>
-      <div className={`rounded-lg border p-2.5 ${highlight ? TONE[highlight] : "border-line bg-surface"}`}>
+      <div className={`rounded-control border p-2.5 ${highlight ? TONE[highlight] : "border-line bg-surface"}`}>
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
           <span className="text-sm font-medium">{step.label}</span>
           <Chip tone={tone}>{k.label}</Chip>
@@ -359,7 +359,7 @@ function Rejudge({ item }: { item: ScoredRun }) {
   };
 
   return (
-    <section aria-labelledby="rd-rejudge" className="rounded-xl border border-line bg-surface-2 p-3">
+    <section aria-labelledby="rd-rejudge" className="rounded-surface border border-line bg-surface-2 p-3">
       <div className="flex flex-wrap items-center gap-2">
         <h3 id="rd-rejudge" className="text-sm font-semibold text-ink">
           Second opinion

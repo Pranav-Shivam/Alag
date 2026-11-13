@@ -19,7 +19,7 @@ function DiffBlock({ title, from, to }: { title: string; from: string; to: strin
       {!changed ? (
         <p className="text-xs text-muted">No differences.</p>
       ) : (
-        <div tabIndex={0} className="max-h-72 overflow-auto rounded-lg border border-line bg-surface-2 py-1 font-mono text-xs leading-relaxed">
+        <div tabIndex={0} className="max-h-72 overflow-auto rounded-control border border-line bg-surface-2 py-1 font-mono text-xs leading-relaxed">
           {rows.map((r, i) =>
             r.type === "skip" ? (
               <div key={i} className="px-3 py-0.5 text-muted">
@@ -73,7 +73,7 @@ export default function VersionsPanel({ agent, onRestore }: Props) {
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="text-sm font-semibold text-ink">Version history</h3>
+        <h3 className="t-label">Version history</h3>
         <p className="mt-0.5 text-xs text-muted">Restoring loads an old version into the draft. It does not go live until you publish it.</p>
       </div>
 

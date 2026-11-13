@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BookOpen, LayoutDashboard, ListChecks, Workflow } from "lucide-react";
-import { Segmented } from "../components/ui";
+import { PageHeader, Segmented } from "../components/ui";
 import OverviewTab from "../components/orchestration/OverviewTab";
 import BehaviorSpecsTab from "../components/orchestration/BehaviorSpecsTab";
 import OrchestrationTab from "../components/orchestration/OrchestrationTab";
@@ -57,13 +57,11 @@ export default function AgentsPage() {
   }, []);
 
   return (
-    <div className="min-w-0 space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight text-ink">Agent engineering and orchestration</h1>
-        <p className="mt-1 max-w-3xl text-sm text-muted">
-          ALAG runs a supervised team of domain agents, not one giant agent. Each has a written behavior spec, approved tools, limited permissions and a trust level, and risky decisions keep a human gate.
-        </p>
-      </header>
+    <div className="page">
+      <PageHeader
+        title="Agent engineering and orchestration"
+        description="ALAG runs a supervised team of domain agents, not one giant agent. Each has a written behavior spec, approved tools, limited permissions and a trust level, and risky decisions keep a human gate."
+      />
 
       <Segmented<SubTab>
         label="Agents sections"

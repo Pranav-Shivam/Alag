@@ -18,7 +18,7 @@ export interface ChartPoint {
 function DataTable({ valueHeader, detailHeader, points, fmt }: { valueHeader: string; detailHeader?: string; points: ChartPoint[]; fmt: (n: number) => string }) {
   return (
     <details className="mt-2 text-xs">
-      <summary className="cursor-pointer rounded text-muted hover:text-ink">View the data as a table</summary>
+      <summary className="cursor-pointer rounded-chip text-muted hover:text-ink">View the data as a table</summary>
       <div className="mt-2 overflow-x-auto">
         <table className="w-full text-left">
           <thead>
@@ -102,11 +102,11 @@ export function TrendChart({ points, threshold, title, desc, valueHeader, detail
         <text x={PAD.l + iw} y={y(threshold) - 5} textAnchor="end" fontSize={11} fontWeight={600} className="fill-current text-warn-fg">
           {`Pass score ${threshold}`}
         </text>
-        {area ? <path d={area} fill="currentColor" fillOpacity={0.12} className="text-accent-fg" /> : null}
-        {line ? <path d={line} fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" className="text-accent-fg" /> : null}
+        {area ? <path d={area} fill="currentColor" fillOpacity={0.12} className="text-chart-1" /> : null}
+        {line ? <path d={line} fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" className="text-chart-1" /> : null}
         {points.map((p, i) => (
           <g key={p.fullLabel}>
-            <circle cx={x(i)} cy={y(p.value)} r={3.5} fill="currentColor" className="text-accent-fg">
+            <circle cx={x(i)} cy={y(p.value)} r={3.5} fill="currentColor" className="text-chart-1">
               <title>{`${p.fullLabel}: ${p.value.toFixed(1)}${p.detail ? `, ${p.detail}` : ""}`}</title>
             </circle>
             {i % step === 0 ? (
@@ -150,7 +150,7 @@ export function BarChart({ points, title, desc, valueHeader, detailHeader, fmt }
           const cx = PAD.l + slot * i + slot / 2;
           return (
             <g key={p.fullLabel}>
-              <rect x={cx - barW / 2} y={y(p.value)} width={barW} height={Math.max(1, PAD.t + ih - y(p.value))} rx={3} fill="currentColor" className="text-info-solid">
+              <rect x={cx - barW / 2} y={y(p.value)} width={barW} height={Math.max(1, PAD.t + ih - y(p.value))} rx={3} fill="currentColor" className="text-chart-1">
                 <title>{`${p.fullLabel}: ${fmt(p.value)}${p.detail ? `, ${p.detail}` : ""}`}</title>
               </rect>
               {i % step === 0 ? (

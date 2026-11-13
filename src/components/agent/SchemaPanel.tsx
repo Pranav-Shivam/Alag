@@ -58,7 +58,7 @@ export default function SchemaPanel({ body, update }: Props) {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold text-ink">Output schema</h3>
+          <h3 className="t-label">Output schema</h3>
           <p className="mt-0.5 text-xs text-muted">The fields the agent must return, every time.</p>
         </div>
         <Segmented

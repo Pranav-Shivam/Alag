@@ -62,7 +62,7 @@ export default function RecommendationCard({ quotation, margin, cost, rules, thr
         {shown.length === 0 ? (
           <p className="text-sm text-muted">No other quotation uses the same material or region.</p>
         ) : (
-          <ul className="divide-y divide-line rounded-lg border border-line">
+          <ul className="divide-y divide-line rounded-control border border-line">
             {shown.map((o) => {
               const oc = OUTCOME[o.outcome];
               return (

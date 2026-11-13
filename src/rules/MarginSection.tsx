@@ -60,7 +60,7 @@ export default function MarginSection({ rules, set }: Props) {
         hint={`A quotation may sit up to ${rules.toleranceBandPct} points away from its target margin. With a ${exampleTarget}% target, margins from ${lo}% to ${hi}% are in band. Outside the band the quotation is flagged for review.`}
       />
 
-      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-line bg-surface-2 p-3 text-sm text-ink-2">
+      <div className="flex flex-wrap items-center gap-2 rounded-control border border-line bg-surface-2 p-3 text-sm text-ink-2">
         <Lock className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
         <span className="min-w-0 flex-1">The AI can never price below the minimum margin.</span>
         <Chip>Locked</Chip>
@@ -98,7 +98,7 @@ export default function MarginSection({ rules, set }: Props) {
             const locked = isCatchAll(t) && i === targets.length - 1;
             const nextIsLockedCatchAll = i + 1 < targets.length && isCatchAll(targets[i + 1]) && i + 1 === targets.length - 1;
             return (
-              <li key={t.id} className={`${GRID} rounded-lg border border-line p-3 @md:border-0 @md:p-0`}>
+              <li key={t.id} className={`${GRID} rounded-control border border-line p-3 @md:border-0 @md:p-0`}>
                 <SelectField label="Material" labelClass={CELL_LABEL} value={t.material} options={MATERIALS} disabled={locked} onChange={(v) => patchTarget(t.id, { material: v })} />
                 <SelectField label="Region" labelClass={CELL_LABEL} value={t.region} options={regions} disabled={locked} onChange={(v) => patchTarget(t.id, { region: v })} />
                 <NumInput label="Target margin" labelClass={CELL_LABEL} value={t.targetPct} min={0} max={99} suffix="%" onChange={(n) => patchTarget(t.id, { targetPct: n })} />

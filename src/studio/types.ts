@@ -85,7 +85,7 @@ export interface RegionModifier {
 
 export interface MarginTarget {
   id: string;
-  material: string; // Teak, Cedar, Oak or "Any"
+  material: string; // a material name or "Any"
   region: string; // or "Any"
   targetPct: number; // fallback margin when the ML model has low confidence
 }
@@ -197,7 +197,7 @@ export interface ExtractionResult {
   fields: ExtractedField[];
 }
 
-export type BomCategory = "wood" | "labour" | "manufacturing" | "finishing" | "hardware" | "logistics" | "installation";
+export type BomCategory = "material" | "labour" | "manufacturing" | "finishing" | "hardware" | "logistics" | "installation";
 
 export interface BomLine {
   id: string;
@@ -246,6 +246,12 @@ export interface ActivityEvent {
   text: string;
 }
 
+/** Estimate Desk lanes, in order. Procurement can only be confirmed after manufacturing. */
+export interface EstimateLanes {
+  manufacturing: boolean;
+  procurement: boolean;
+}
+
 export interface QuotationCase {
   quotationId: string;
   email: EmailRecord;
@@ -253,6 +259,7 @@ export interface QuotationCase {
   extraction: ExtractionResult;
   rfqApproved: boolean;
   clarification: ClarificationDraft | null;
+  lanes: EstimateLanes;
   bom: BomLine[];
   margin: MarginDecision | null;
   quotationDraft: QuotationDraft | null;

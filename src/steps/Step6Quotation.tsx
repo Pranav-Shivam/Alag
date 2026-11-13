@@ -21,7 +21,7 @@ export default function Step6Quotation({ quotation }: CaseProps) {
     return (
       <Card className="flex flex-col items-center gap-2 px-6 py-10 text-center">
         <FileText className="h-8 w-8 text-muted" aria-hidden="true" />
-        <h3 className="text-sm font-semibold text-ink">No quotation yet</h3>
+        <h3 className="t-label">No quotation yet</h3>
         <p className="max-w-sm text-sm text-muted">
           {quotation.id} has not reached the customer quotation step. It is at step {quotation.currentStep}. Cost, margin and approval come first, then the quotation appears here.
         </p>

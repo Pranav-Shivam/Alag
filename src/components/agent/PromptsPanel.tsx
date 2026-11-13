@@ -182,7 +182,7 @@ export default function PromptsPanel({ body, live, update }: Props) {
       {live.extractionPrompt !== undefined ? (
         <PromptField
           label="Extraction prompt"
-          hint="Extra rules for reading documents and drawings, such as units, handwriting and wood names."
+          hint="Extra rules for reading documents and drawings, such as units, handwriting and material names."
           value={body.extractionPrompt ?? ""}
           onChange={(v) => update({ extractionPrompt: v })}
           rows={9}

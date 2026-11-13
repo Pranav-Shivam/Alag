@@ -97,7 +97,7 @@ function email(q: Quotation, atts: Attachment[]): EmailRecord {
 
 const BOXES: Record<string, [number, number, number, number]> = {
   product_type: [0.08, 0.06, 0.5, 0.05],
-  wood_type: [0.1, 0.14, 0.3, 0.04],
+  material_type: [0.1, 0.14, 0.3, 0.04],
   length_in: [0.16, 0.42, 0.34, 0.05],
   width_in: [0.58, 0.58, 0.26, 0.05],
   height_in: [0.7, 0.28, 0.2, 0.05],
@@ -128,7 +128,7 @@ function extraction(q: Quotation, atts: Attachment[]): ExtractionResult {
   const handwritten = primary?.kind === "sketch";
   const raw: { key: string; label: string; value: string | null; unit?: string; base: number; required: boolean; note?: string }[] = [
     { key: "product_type", label: "Product", value: q.product.replace(/\s*\(.*\)/, ""), base: 97, required: true },
-    { key: "wood_type", label: "Wood type", value: q.material, base: 94, required: true },
+    { key: "material_type", label: "Material", value: q.material, base: 94, required: true },
     { key: "length_in", label: "Length", value: String(L), unit: "in", base: handwritten ? 72 : 93, required: true },
     { key: "width_in", label: "Width", value: String(W), unit: "in", base: handwritten ? 68 : 91, required: true },
     { key: "height_in", label: "Height", value: String(H), unit: "in", base: handwritten ? 64 : 90, required: true },
@@ -188,11 +188,11 @@ function bom(q: Quotation): BomLine[] {
     source,
   });
   const lines: BomLine[] = [
-    mk("wood", `${q.material} timber`, "cu ft", 0.36, woodP, "supplier"),
-    mk("wood", "Plywood backing 18 mm", "sheet", 0.04, 62),
-    mk("labour", "Carpenter and assembly", "hour", 0.2, 42),
+    mk("material", `${q.material} primary material`, "cu ft", 0.36, woodP, "supplier"),
+    mk("material", "Backing sheet 18 mm", "sheet", 0.04, 62),
+    mk("labour", "Skilled labour and assembly", "hour", 0.2, 42),
     mk("manufacturing", "Machine and shop time", "hour", 0.12, 65),
-    mk("finishing", "Paint and polish", "litre", 0.05, 28),
+    mk("finishing", "Coating and finish", "litre", 0.05, 28),
     mk("finishing", "Spray finishing", "sq ft", 0.03, 3.2),
     mk("hardware", "Screws, hinges, runners", "lot", 0.04, 95),
     mk("hardware", "Glue and adhesives", "kg", 0.01, 18),
@@ -243,7 +243,7 @@ const DONE_TEXT: Record<number, [ActivityEvent["actor"], string]> = {
   1: ["AI", "Classified email as RFQ, stored original and attachments, created RFQ record"],
   2: ["AI", "Extracted specification fields from the attachment and scored confidence"],
   3: ["Human", "Reviewed extracted fields and approved the RFQ for estimation"],
-  4: ["Human", "Approved design and bill of materials. Cost engine produced the estimate"],
+  4: ["Human", "Manufacturing input confirmed first, then procurement input. Cost engine produced the estimate"],
   5: ["AI", "Margin model recommended a target margin and explained it"],
   6: ["Human", "Sent the quotation and recorded the customer decision"],
   7: ["System", "Converted the accepted quotation into a sales order"],
@@ -299,6 +299,8 @@ export function seedCase(q: Quotation): QuotationCase {
     extraction: extraction(q, attachments),
     rfqApproved: q.outcome !== "in_progress" || q.currentStep > 3,
     clarification: clarification(q),
+    // Past step 4 both lanes are confirmed. A quote sitting on step 4 has manufacturing done and procurement still open.
+    lanes: { manufacturing: priced, procurement: priced && (q.outcome !== "in_progress" || q.currentStep > 4) },
     bom: priced ? bom(q) : [],
     margin: marginKnown ? margin(q) : null,
     quotationDraft: q.outcome !== "in_progress" || q.currentStep >= 6 ? quotationDraft(q) : null,

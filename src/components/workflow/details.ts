@@ -27,13 +27,13 @@ function pick<T>(list: T[], n: number): T {
 }
 
 const SUPPLIERS = [
-  ["Cascade Timber Co", "Northern Hardwoods", "Pacific Veneer Supply"],
-  ["Lone Star Lumber", "Heritage Wood Imports", "Bayou Millworks"],
-  ["Empire Wood Traders", "Hudson Timber Group", "GreenGrain Supply"],
-  ["Summit Lumber Yard", "Redline Hardware", "Oakridge Woodworks"],
+  ["Cascade Supply Co", "Northern Materials", "Pacific Components"],
+  ["Lone Star Supply", "Heritage Imports", "Bayou Industrial"],
+  ["Empire Traders", "Hudson Supply Group", "GreenGrain Supply"],
+  ["Summit Supply Yard", "Redline Hardware", "Oakridge Industrial"],
 ];
 const CARRIERS = ["Pioneer Freight", "BlueLine Logistics", "Summit Haulers", "Coastal Movers"];
-const STAGES = ["Cutting", "Shaping", "Assembly", "Polishing", "Quality inspection"];
+const STAGES = ["Cutting", "Forming", "Assembly", "Finishing", "Quality inspection"];
 
 function cost(q: Quotation): number {
   return q.value * (1 - q.marginPct / 100);
@@ -67,6 +67,7 @@ export function getStepDetails(q: Quotation, stepId: number): DetailRow[] {
         { label: "From", value: `buyer@${slug(q.customer)}.example` },
         { label: "Received on", value: formatDate(q.receivedOn) },
         { label: "Attachments", value: `${1 + (n % 4)} files (PDF, sketch, photo)` },
+        { label: "Lead source", value: pick(["Shared mailbox", "Web form", "Partner referral", "Customer portal"], n) },
         { label: "Duplicate check", value: "No duplicate found" },
       ];
     case 2: {
@@ -74,7 +75,7 @@ export function getStepDetails(q: Quotation, stepId: number): DetailRow[] {
       return [
         { label: "Fields extracted", value: `${9 + (n % 4)} of 12` },
         { label: "Average confidence", value: `${84 + (n % 13)}%` },
-        { label: "Wood type", value: `${q.material} (${90 + (n % 9)}% confidence)` },
+        { label: "Material", value: `${q.material} (${90 + (n % 9)}% confidence)` },
         { label: "Low confidence fields", value: lowConf === 0 ? "None" : `${lowConf} flagged for review` },
       ];
     }
@@ -83,12 +84,15 @@ export function getStepDetails(q: Quotation, stepId: number): DetailRow[] {
       return [
         { label: "Missing information", value: missing },
         { label: "Clarification email", value: missing === "None" ? "Not needed" : "Drafted by AI, waiting for customer" },
+        { label: "Lead score", value: `${60 + (n % 36)} of 100` },
         { label: "Reviewed by", value: q.estimator },
         { label: "Approved on", value: formatDate(addDays(q.receivedOn, 2)) },
       ];
     }
     case 4:
       return [
+        { label: "Manufacturing input", value: q.outcome !== "in_progress" || q.currentStep > 4 ? "Confirmed" : "Confirmed, routing and hours set" },
+        { label: "Procurement input", value: q.outcome !== "in_progress" || q.currentStep > 4 ? "Confirmed" : "In progress, waiting on supplier quotes" },
         { label: "BOM lines", value: `${14 + (n % 21)} items` },
         { label: "Main material", value: q.material },
         { label: "Total cost", value: priced ? money(cost(q)) : "Calculation in progress" },
@@ -135,7 +139,7 @@ export function getStepDetails(q: Quotation, stepId: number): DetailRow[] {
       return [
         { label: "Goods received", value: q.currentStep > 9 ? "100%" : `${60 + (n % 4) * 10}%` },
         { label: "Inspection", value: "Passed" },
-        { label: "Stock reserved", value: `${40 + (n % 60)} board feet of ${q.material}` },
+        { label: "Stock reserved", value: `${40 + (n % 60)} units of ${q.material}` },
         { label: "Warehouse", value: `${q.region} main warehouse` },
       ];
     case 10:

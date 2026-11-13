@@ -97,6 +97,14 @@ export function getAttention(c: QuotationCase | undefined, stepId: number, statu
     );
   }
 
+  if (stepId === 4 && c.bom.length > 0) {
+    if (!c.lanes.manufacturing) {
+      out.push({ id: "lane-mfg", tone: "warn", label: "Manufacturing input open", detail: "Manufacturing confirms routing and hours first. Procurement starts after that." });
+    } else if (!c.lanes.procurement) {
+      out.push({ id: "lane-proc", tone: "warn", label: "Procurement input open", detail: "Manufacturing is confirmed. Procurement still has to price materials and bought-in parts." });
+    }
+  }
+
   if (stepId === 4) {
     const { overrides } = bomTotals(c.bom);
     if (overrides > 0) {

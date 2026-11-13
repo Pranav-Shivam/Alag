@@ -90,11 +90,11 @@ export default function DiscountSection({ rules, set }: Props) {
             const canRemove = tiers.length > 1 && (!isTop || catchAllCount > 1);
             const prev = i > 0 ? sorted[i - 1].upToValue : 0;
             return (
-              <li key={t.id} className={`${GRID} rounded-lg border border-line p-3 @md:border-0 @md:p-0`}>
+              <li key={t.id} className={`${GRID} rounded-control border border-line p-3 @md:border-0 @md:p-0`}>
                 {isTop ? (
                   <div className="col-span-1">
                     <span className={CELL_LABEL}>Up to</span>
-                    <div className="flex min-h-10 items-center gap-1.5 whitespace-nowrap rounded-lg border border-line bg-surface-2 px-3 text-sm text-ink-2">
+                    <div className="flex min-h-10 items-center gap-1.5 whitespace-nowrap rounded-control border border-line bg-surface-2 px-3 text-sm text-ink-2">
                       <Lock className="h-3.5 w-3.5 shrink-0 text-muted" aria-hidden="true" />
                       Up to: no limit
                     </div>

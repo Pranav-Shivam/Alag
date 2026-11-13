@@ -24,7 +24,7 @@ export default function DocumentViewer({ attachments, currentId, onChangeAttachm
   const current = attachments.find((a) => a.id === currentId) ?? attachments[0];
 
   return (
-    <section aria-label="Document viewer" data-viewer className="min-w-0 rounded-xl border border-line bg-surface shadow-xs">
+    <section aria-label="Document viewer" data-viewer className="surface min-w-0">
       <div className="flex items-center gap-2 border-b border-line p-2.5">
         <FileText className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
         {attachments.length > 1 ? (
@@ -36,7 +36,7 @@ export default function DocumentViewer({ attachments, currentId, onChangeAttachm
               id="review-attachment"
               value={current?.id ?? ""}
               onChange={(e) => onChangeAttachment(e.target.value)}
-              className="min-h-8 min-w-0 flex-1 rounded-lg border border-line-strong bg-surface px-2 text-xs text-ink hover:border-muted focus:border-ring"
+              className="min-h-8 min-w-0 flex-1 rounded-control border border-line-strong bg-surface px-2 text-xs text-ink hover:border-muted focus:border-ring"
             >
               {attachments.map((a) => (
                 <option key={a.id} value={a.id}>
@@ -53,7 +53,7 @@ export default function DocumentViewer({ attachments, currentId, onChangeAttachm
           onClick={onToggle}
           aria-expanded={open}
           aria-controls="review-viewer-body"
-          className="inline-flex min-h-8 shrink-0 items-center gap-1 rounded-lg border border-transparent px-2 text-xs font-medium text-ink-2 hover:bg-surface-2 @2xl:hidden"
+          className="inline-flex min-h-8 shrink-0 items-center gap-1 rounded-control border border-transparent px-2 text-xs font-medium text-ink-2 hover:bg-surface-2 @2xl:hidden"
         >
           {open ? <ChevronUp className="h-3.5 w-3.5" aria-hidden="true" /> : <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />}
           {open ? "Hide document" : "Show document"}
@@ -85,7 +85,7 @@ function FileError({ att }: { att: Attachment }) {
             href={att.url}
             target="_blank"
             rel="noreferrer noopener"
-            className="mt-2 inline-flex min-h-8 items-center gap-1.5 rounded-lg border border-danger-line bg-surface px-2.5 text-xs font-medium text-danger-fg hover:bg-surface-2"
+            className="mt-2 inline-flex min-h-8 items-center gap-1.5 rounded-control border border-danger-line bg-surface px-2.5 text-xs font-medium text-danger-fg hover:bg-surface-2"
           >
             <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
             Open in new tab
@@ -110,7 +110,7 @@ function PdfStage({ att, page, onPageChange }: { att: Attachment; page: number; 
           <select
             value={safePage}
             onChange={(e) => onPageChange(Number(e.target.value))}
-            className="min-h-8 rounded-lg border border-line-strong bg-surface px-2 text-xs text-ink hover:border-muted focus:border-ring"
+            className="min-h-8 rounded-control border border-line-strong bg-surface px-2 text-xs text-ink hover:border-muted focus:border-ring"
           >
             {Array.from({ length: pages }, (_, i) => (
               <option key={i + 1} value={i + 1}>
@@ -125,14 +125,14 @@ function PdfStage({ att, page, onPageChange }: { att: Attachment; page: number; 
           href={`${att.url}#page=${safePage}`}
           target="_blank"
           rel="noreferrer noopener"
-          className="ml-auto inline-flex min-h-8 items-center gap-1 rounded-lg px-2 text-xs font-medium text-accent-fg hover:bg-surface-2"
+          className="ml-auto inline-flex min-h-8 items-center gap-1 rounded-control px-2 text-xs font-medium text-accent-fg hover:bg-surface-2"
         >
           <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
           Open in new tab
         </a>
       </div>
       <p className="px-2.5 py-1.5 text-xs text-muted">Highlights are shown on images. For PDFs, each field shows its page.</p>
-      <object key={`${att.url}-${safePage}`} data={`${att.url}#page=${safePage}`} type="application/pdf" aria-label={`${att.title}, page ${safePage}`} className="mx-2.5 mb-2.5 min-h-0 flex-1 rounded-md border border-line bg-surface-2">
+      <object key={`${att.url}-${safePage}`} data={`${att.url}#page=${safePage}`} type="application/pdf" aria-label={`${att.title}, page ${safePage}`} className="mx-2.5 mb-2.5 min-h-0 flex-1 rounded-chip border border-line bg-surface-2">
         <FileError att={att} />
       </object>
     </div>
@@ -284,7 +284,7 @@ function ImageStage({ att, fields, selectedKey, onSelectField }: { att: Attachme
           onPointerCancel={endDrag}
           onKeyDown={onKeyDown}
           style={{ touchAction: view.z > 1 ? "none" : "pan-y" }}
-          className={`relative m-2.5 min-h-0 flex-1 select-none overflow-hidden rounded-md border border-line bg-surface-2 ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
+          className={`relative m-2.5 min-h-0 flex-1 select-none overflow-hidden rounded-chip border border-line bg-surface-2 ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
         >
           <img
             src={att.url}
@@ -315,10 +315,10 @@ function ImageStage({ att, fields, selectedKey, onSelectField }: { att: Attachme
                     onPointerDown={(e) => e.stopPropagation()}
                     onClick={() => onSelectField(f.key)}
                     style={{ left, top, width, height }}
-                    className={`absolute cursor-pointer rounded-sm border-2 ${selected ? `z-10 ${BOX_CLASS[meta.tone].selected}` : BOX_CLASS[meta.tone].idle}`}
+                    className={`absolute cursor-pointer rounded-chip border-2 ${selected ? `z-10 ${BOX_CLASS[meta.tone].selected}` : BOX_CLASS[meta.tone].idle}`}
                   >
                     <span
-                      className={`pointer-events-none absolute left-[-2px] max-w-40 truncate whitespace-nowrap rounded border px-1 text-[11px] font-medium leading-4 ${labelBelow ? "top-full mt-0.5" : "bottom-full mb-0.5"} ${
+                      className={`pointer-events-none absolute left-[-2px] max-w-40 truncate whitespace-nowrap rounded-chip border px-1 text-2xs font-medium leading-4 ${labelBelow ? "top-full mt-0.5" : "bottom-full mb-0.5"} ${
                         selected ? BOX_LABEL_CLASS[meta.tone].selected : BOX_LABEL_CLASS[meta.tone].idle
                       }`}
                     >

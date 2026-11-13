@@ -9,14 +9,14 @@ export default function AttachmentList({ attachments, onRemove }: { attachments:
     <Card className="p-4">
       <SectionTitle title={`Attachments (${attachments.length})`} hint="Files the AI reads in the next step." />
       {attachments.length === 0 ? (
-        <div className="mt-3 flex items-center gap-2 rounded-lg border border-dashed border-line-strong bg-surface-2 p-4 text-sm text-muted">
+        <div className="mt-3 flex items-center gap-2 rounded-control border border-dashed border-line-strong bg-surface-2 p-4 text-sm text-muted">
           <Paperclip className="h-4 w-4 shrink-0" aria-hidden="true" />
           No files yet. Attach one from the sample library or upload your own below.
         </div>
       ) : (
         <ul className="mt-3 space-y-3">
           {attachments.map((a) => (
-            <li key={a.id} className="flex min-w-0 gap-3 rounded-lg border border-line p-3">
+            <li key={a.id} className="flex min-w-0 gap-3 rounded-control border border-line p-3">
               <AttachmentThumb item={a} className="h-16 w-16 @md:h-20 @md:w-20" />
               <div className="min-w-0 flex-1">
                 <div className="break-words text-sm font-semibold text-ink">{a.title}</div>
@@ -41,7 +41,7 @@ export default function AttachmentList({ attachments, onRemove }: { attachments:
                       href={a.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-8 items-center gap-1 rounded-lg px-1.5 text-xs font-medium text-accent-fg underline underline-offset-2 hover:text-accent-hover"
+                      className="inline-flex min-h-8 items-center gap-1 rounded-control px-1.5 text-xs font-medium text-accent-fg underline underline-offset-2 hover:text-accent-hover"
                     >
                       Source
                       <ExternalLink className="h-3 w-3" aria-hidden="true" />

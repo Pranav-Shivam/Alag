@@ -57,7 +57,7 @@ function QuotationSelect({ quotations, value, onSelect, className, label }: { qu
         aria-label={label}
         value={value}
         onChange={(e) => onSelect(e.target.value)}
-        className="min-h-10 w-full appearance-none rounded-lg border border-line-strong bg-surface py-2 pl-3 pr-10 text-sm text-ink transition-colors hover:bg-surface-2"
+        className="min-h-10 w-full appearance-none rounded-control border border-line-strong bg-surface py-2 pl-3 pr-10 text-sm text-ink transition-colors hover:bg-surface-2"
       >
         {value === "" && (
           <option value="" disabled>
@@ -78,7 +78,7 @@ function QuotationSelect({ quotations, value, onSelect, className, label }: { qu
 function Fact({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="min-w-0">
-      <dt className="text-[11px] font-semibold uppercase tracking-wider text-muted">{label}</dt>
+      <dt className="t-eyebrow">{label}</dt>
       <dd className="mt-0.5 break-words text-sm font-medium tabular-nums text-ink">{children}</dd>
     </div>
   );
@@ -94,12 +94,12 @@ function Pending() {
 
 function EmptyState({ quotations, onSelect, onBack }: Omit<Props, "quotation">) {
   return (
-    <div className="mx-auto max-w-lg rounded-2xl border border-dashed border-line-strong bg-surface p-8 text-center">
+    <div className="mx-auto max-w-lg rounded-surface border border-dashed border-line-strong bg-surface p-8 text-center">
       <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-surface-2 text-muted">
         <GitBranch className="h-6 w-6" aria-hidden="true" />
       </span>
-      <h1 className="mt-4 text-lg font-semibold tracking-tight text-ink">No quotation selected</h1>
-      <p className="mt-1 text-sm text-ink-2">Pick a quotation to see its journey from RFQ ingestion to an awarded order or a rejection.</p>
+      <h2 className="t-title mt-4">No quotation selected</h2>
+      <p className="mt-1 text-sm text-ink-2">Pick a quotation to see its journey from lead and RFQ intake to an awarded order or a rejection.</p>
       <Button variant="primary" className="mt-5" onClick={onBack}>
         Pick a quotation
       </Button>
@@ -127,10 +127,10 @@ function HeaderCard({ quotation, quotations, onSelect, onBack, doneCount }: Omit
 
       <div className="mt-3 flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
         <div className="min-w-0">
-          <h1 className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-            <span className="text-xl font-semibold tabular-nums tracking-tight text-ink">{quotation.id}</span>
+          <h2 className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+            <span className="t-title tabular-nums">{quotation.id}</span>
             <span className="text-base font-medium text-ink-2">{quotation.customer}</span>
-          </h1>
+          </h2>
           <ol className="mt-1.5 flex flex-wrap items-center gap-1" aria-label="Linked records">
             {chain.map((c, i) => (
               <li key={c} className="flex items-center gap-1">
@@ -243,7 +243,7 @@ function WorkflowBody({ quotation, quotations, onSelect, onBack }: Props & { quo
   );
 
   return (
-    <div className="space-y-4">
+    <div className="page">
       <HeaderCard quotation={quotation} quotations={quotations} onSelect={onSelect} onBack={onBack} doneCount={doneCount} />
 
       {quotation.outcome === "rejected" && (
@@ -265,17 +265,17 @@ function WorkflowBody({ quotation, quotations, onSelect, onBack }: Props & { quo
       <div className="lg:grid lg:grid-cols-[20rem_minmax(0,1fr)] lg:items-start lg:gap-5">
         <aside
           aria-label="Workflow"
-          className="min-w-0 rounded-xl border border-line bg-surface p-2 shadow-xs lg:sticky lg:top-20 lg:max-h-[calc(100dvh-6.5rem)] lg:overflow-y-auto"
+          className="surface min-w-0 p-2 lg:sticky lg:top-20 lg:max-h-[calc(100dvh-6.5rem)] lg:overflow-y-auto"
         >
           <div className="px-2 pb-2 pt-1">
-            <h2 className="text-sm font-semibold text-ink">Workflow steps</h2>
+            <h2 className="t-label">Workflow steps</h2>
             <p className="text-xs text-muted">Select a step to open it.</p>
           </div>
           <StepRail quotation={quotation} statuses={statuses} selectedId={selected} onSelect={openStep} />
         </aside>
 
         {isDesktop ? (
-          <div className="min-w-0 overflow-hidden rounded-xl border border-line bg-surface shadow-xs lg:sticky lg:top-20 lg:h-[calc(100dvh-6.5rem)] lg:min-h-[28rem]">
+          <div className="surface min-w-0 overflow-hidden lg:sticky lg:top-20 lg:h-[calc(100dvh-6.5rem)] lg:min-h-[28rem]">
             {dismissed ? (
               <div className="grid h-full place-items-center p-8 text-center">
                 <div>

@@ -54,7 +54,7 @@ export default function Runs({ scored, rules, scoring, filters, setFilters, sele
 
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-line bg-surface p-3 shadow-xs">
+      <div className="surface p-3">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Select label="Agent" value={String(filters.stepId)} onChange={(e) => set({ stepId: e.target.value === "all" ? "all" : Number(e.target.value) })}>
             <option value="all">All agents</option>
@@ -126,7 +126,7 @@ export default function Runs({ scored, rules, scoring, filters, setFilters, sele
                   type="button"
                   onClick={() => onSelect(run.id)}
                   aria-haspopup="dialog"
-                  className={`w-full rounded-xl border bg-surface p-3 text-left shadow-xs transition-colors hover:bg-surface-2 ${selectedId === run.id ? "border-accent" : "border-line"}`}
+                  className={`w-full rounded-surface border bg-surface p-3 text-left shadow-surface transition-colors hover:bg-surface-2 ${selectedId === run.id ? "border-accent" : "border-line"}`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
@@ -158,7 +158,7 @@ export default function Runs({ scored, rules, scoring, filters, setFilters, sele
           </ul>
 
           {/* Wide: table */}
-          <div className="hidden overflow-x-auto rounded-xl border border-line bg-surface shadow-xs xl:block">
+          <div className="surface hidden overflow-x-auto xl:block">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-line text-left text-xs text-muted">
@@ -185,7 +185,7 @@ export default function Runs({ scored, rules, scoring, filters, setFilters, sele
                         }}
                         aria-haspopup="dialog"
                         aria-label={`Open run ${run.id}`}
-                        className="rounded text-left"
+                        className="rounded-chip text-left"
                       >
                         <div className="font-mono text-xs font-medium text-ink">{run.id}</div>
                         <div className="text-xs text-muted">{run.quotationId}</div>

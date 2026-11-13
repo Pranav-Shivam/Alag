@@ -59,7 +59,7 @@ export default function BottomSheet({ labelledBy, onClose, children }: Props) {
         aria-labelledby={labelledBy}
         tabIndex={-1}
         onKeyDown={trap}
-        className="fixed inset-x-0 bottom-0 top-28 z-50 flex flex-col overflow-hidden rounded-t-2xl border border-b-0 border-line-strong bg-surface shadow-lg outline-none transition-transform duration-200 ease-out starting:translate-y-full"
+        className="fixed inset-x-0 bottom-0 top-28 z-50 flex flex-col overflow-hidden rounded-t-surface border border-b-0 border-line-strong bg-surface shadow-raised outline-none transition-transform duration-200 ease-out starting:translate-y-full"
       >
         <div aria-hidden="true" className="flex shrink-0 justify-center pb-1 pt-2">
           <span className="h-1 w-10 rounded-full bg-line-strong" />

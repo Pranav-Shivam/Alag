@@ -97,13 +97,13 @@ const COMMON_GUARDRAILS: Guardrail[] = [
 ];
 
 const EXTRACTION_SCHEMA: SchemaField[] = [
-  f("product_type", "string", true, "What the customer wants made: bed, wardrobe, kitchen, door, TV cabinet, vanity, full bedroom interior.", 80),
-  f("wood_type", "enum", true, "Wood species named by the customer: teak (sagwan), cedar, oak, other. Use null if not stated.", 85),
+  f("product_type", "string", true, "What the customer wants made, for example a cabinet, frame, enclosure, door or a full interior fit-out.", 80),
+  f("material_type", "enum", true, "Primary material named by the customer, for example teak, oak, steel, aluminium or other. Use null if not stated.", 85),
   f("length_in", "number", true, "Overall length in inches. Convert from feet or cm. Never guess a missing number.", 90),
   f("width_in", "number", true, "Overall width in inches.", 90),
   f("height_in", "number", true, "Overall height in inches.", 90),
   f("quantity", "number", true, "Number of identical units. Default to null, not 1, when not stated.", 85),
-  f("finish", "string", false, "Polish, paint, or spray finish and colour as written or drawn.", 70),
+  f("finish", "string", false, "Coating, paint, polish or spray finish and colour as written or drawn.", 70),
   f("delivery_location", "string", false, "City or site address for delivery and installation.", 70),
 ];
 
@@ -124,7 +124,7 @@ interface Seed {
 const SEEDS: Record<number, Seed> = {
   1: {
     system:
-      "You are the RFQ Agent for ALAG, a custom wooden furniture and interiors manufacturer. You read emails forwarded by estimators and decide if they are customer requests for quotation (RFQs). You classify, summarise and organise. You never reply to customers.",
+      "You are the RFQ Agent for ALAG, a made-to-order manufacturer. You read leads from the shared mailbox, web forms and the portal and decide if they are customer requests for quotation (RFQs). You classify, summarise and organise. You never reply to customers.",
     instruction:
       "Email subject: {{email_subject}}\nEmail body:\n{{email_body}}\nAttachments: {{attachment_list}}\n\n1. Say whether this is an RFQ, a follow-up to an existing RFQ, or not an RFQ.\n2. Classify every attachment: sketch, construction drawing, specification PDF, photo, other.\n3. List what the customer asked for in one sentence per product.\n4. Flag if this looks like a duplicate of {{recent_rfqs}}.",
     schema: [
@@ -132,7 +132,7 @@ const SEEDS: Record<number, Seed> = {
       f("customer_name", "string", true, "Customer or company name from the signature or sender."),
       f("duplicate_of", "string", false, "Existing RFQ id if this is a duplicate or follow-up."),
     ],
-    tools: [t("t-graph", "outlook.read_message", "Read mail and attachments through Microsoft Graph", true, true), t("t-store", "blob.store_original", "Save the untouched original email and files", true, true)],
+    tools: [t("t-graph", "mailbox.read_message", "Read mail, form and portal leads with their attachments", true, true), t("t-store", "blob.store_original", "Save the untouched original email and files", true, true)],
     autonomy: "auto",
     threshold: 85,
     variables: ["email_subject", "email_body", "attachment_list", "recent_rfqs", "estimator"],
@@ -141,13 +141,13 @@ const SEEDS: Record<number, Seed> = {
   },
   2: {
     system:
-      "You are the Document Intelligence Agent for ALAG. You read handwritten sketches, construction drawings, PDFs and photos and extract furniture specifications into JSON. You report only what is visible or written. Missing information stays null.",
+      "You are the Document Intelligence Agent for ALAG. You read handwritten sketches, construction drawings, PDFs and photos and extract product specifications into JSON. You report only what is visible or written. Missing information stays null.",
     instruction:
       "Attachment: {{attachment_name}} ({{attachment_kind}}, page {{page}})\nEmail context: {{email_body}}\n\nExtract the fields in the schema. For each field return: value, unit, confidence (0 to 100), the page and the box where you read it, and a short note when unsure. If the drawing and the email disagree, return both and set needs_review.",
     extraction:
-      "Rules for reading drawings:\n- Dimensions may be in feet and inches (6'6\"), inches, or cm. Convert to inches and keep the original text in the note.\n- Handwriting: if a digit could be read two ways (1 or 7, 5 or 6), lower confidence below 60 and say which.\n- Wood names: sagwan means teak. Mahogany and sheesham map to other.\n- Never infer a missing dimension from the other two or from typical furniture sizes.\n- Return null with a note, not 0, when a value is not shown.",
+      "Rules for reading drawings:\n- Dimensions may be in feet and inches (6'6\"), inches, or cm. Convert to inches and keep the original text in the note.\n- Handwriting: if a digit could be read two ways (1 or 7, 5 or 6), lower confidence below 60 and say which.\n- Material names: use the name written on the drawing. Map unknown or local names to other and keep the original in the note.\n- Never infer a missing dimension from the other two or from typical sizes.\n- Return null with a note, not 0, when a value is not shown.",
     schema: EXTRACTION_SCHEMA,
-    tools: [t("t-ocr", "azure_di.read", "OCR for printed and handwritten text", true, false), t("t-vision", "vision.describe", "Vision model for sketches and photos", true, false), t("t-rag", "rag.similar_projects", "Retrieve similar past RFQs for reference only", true, false)],
+    tools: [t("t-ocr", "ocr.read", "OCR for printed and handwritten text", true, false), t("t-vision", "vision.describe", "Vision model for sketches and photos", true, false), t("t-rag", "rag.similar_projects", "Retrieve similar past RFQs for reference only", true, false)],
     guardrails: [g("g-nomiss", "Never assume or invent a missing dimension, material or quantity.", true), g("g-orig", "Never modify or overwrite the original customer document.", true), g("g-conf", "Always return a confidence score and the source location for each field.", true)],
     autonomy: "suggest",
     threshold: 85,
@@ -161,7 +161,7 @@ const SEEDS: Record<number, Seed> = {
     instruction:
       "Product: {{product_type}}\nExtracted fields:\n{{fields_json}}\nRequired fields for this product: {{required_fields}}\n\n1. List missing and conflicting fields.\n2. Say if the RFQ is ready for estimation.\n3. If not, draft a short clarification email to {{customer_name}} that asks only for what is missing. Use plain words and give an example of the format we want.",
     schema: [f("ready_for_estimation", "boolean", true, "True only when every required field is verified or edited by a human."), f("missing_fields", "string", false, "Comma separated keys of fields that are missing or conflicting.")],
-    tools: [t("t-mail", "outlook.create_draft", "Create a draft email. Sending needs a human.", true, true), t("t-send", "outlook.send", "Send email on behalf of an employee", false, true)],
+    tools: [t("t-mail", "mailbox.create_draft", "Create a draft email. Sending needs a human.", true, true), t("t-send", "mailbox.send", "Send email on behalf of an employee", false, true)],
     guardrails: [g("g-nosend", "Never send an email to a customer. Create a draft only.", true), g("g-noapprove", "Never approve an RFQ for estimation. A human decides.", true)],
     autonomy: "draft",
     threshold: 85,
@@ -203,7 +203,7 @@ const SEEDS: Record<number, Seed> = {
     instruction:
       "Customer: {{customer_name}}\nProject: {{project_name}}\nLine items and prices: {{priced_items}}\nTotal: {{total}}\nPayment terms: {{payment_terms}}\nValid for: {{validity_days}} days\n\nWrite a cover email under 150 words. Summarise scope in plain language. Do not promise anything not in the quotation.",
     schema: [f("cover_email", "string", true, "Email body for the sales person to review."), f("scope_summary", "string", true, "Two sentence scope summary.")],
-    tools: [t("t-doc", "quotation.render_pdf", "Render the quotation document", true, true), t("t-mail", "outlook.create_draft", "Draft only", true, true)],
+    tools: [t("t-doc", "quotation.render_pdf", "Render the quotation document", true, true), t("t-mail", "mailbox.create_draft", "Draft only", true, true)],
     guardrails: [g("g-price", "All prices and discounts come from the pricing engine. Do not retype or round them.", true), g("g-send", "A human sends the quotation.", true)],
     autonomy: "draft",
     threshold: 85,

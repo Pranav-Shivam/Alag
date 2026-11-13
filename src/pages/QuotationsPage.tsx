@@ -3,6 +3,7 @@ import type { KeyboardEvent } from "react";
 import { ChevronRight, CircleX, FileSearch, Files, Loader, Search, Trophy } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { NeedsAttention, OutcomeBadge, StepStrip } from "../components/Badges";
+import { PageHeader } from "../components/ui";
 import { currentStepLabel, formatDate, formatUSD } from "../lib/status";
 import type { Outcome, Quotation } from "../types";
 
@@ -35,10 +36,10 @@ function Tile({
   iconClass: string;
 }) {
   return (
-    <div className="rounded-xl border border-line bg-surface p-4 shadow-sm">
+    <div className="surface p-4">
       <div className="flex items-center justify-between gap-2">
         <div className="text-xs font-medium uppercase tracking-wide text-muted">{label}</div>
-        <span className={"grid h-8 w-8 shrink-0 place-items-center rounded-lg " + iconClass}>
+        <span className={"grid h-8 w-8 shrink-0 place-items-center rounded-control " + iconClass}>
           <Icon className="h-4 w-4" aria-hidden="true" />
         </span>
       </div>
@@ -122,7 +123,9 @@ export default function QuotationsPage({ quotations, selectedId, onOpen }: Props
   }, [quotations, filter, search]);
 
   return (
-    <div className="space-y-6">
+    <div className="page">
+      <PageHeader title="All quotations" description="Every lead and RFQ, from first contact to an awarded order or a rejection." />
+
       <section aria-label="Summary" className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Tile
           label="Total quotations"
@@ -195,13 +198,13 @@ export default function QuotationsPage({ quotations, selectedId, onOpen }: Props
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search ID, customer or product"
             aria-label="Search quotations"
-            className="min-h-10 w-full rounded-lg border border-line-strong bg-surface pl-9 pr-3 text-sm text-ink transition-colors placeholder:text-muted hover:border-muted focus:border-ring"
+            className="min-h-10 w-full rounded-control border border-line-strong bg-surface pl-9 pr-3 text-sm text-ink transition-colors placeholder:text-muted hover:border-muted focus:border-ring"
           />
         </div>
       </section>
 
       {visible.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-line-strong bg-surface px-4 py-14 text-center">
+        <div className="rounded-surface border border-dashed border-line-strong bg-surface px-4 py-14 text-center">
           <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-surface-2 text-muted">
             <FileSearch className="h-6 w-6" aria-hidden="true" />
           </span>
@@ -213,7 +216,7 @@ export default function QuotationsPage({ quotations, selectedId, onOpen }: Props
               setFilter("all");
               setSearch("");
             }}
-            className="mt-4 min-h-10 rounded-lg border border-line-strong bg-surface px-4 text-sm font-medium text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink"
+            className="mt-4 min-h-10 rounded-control border border-line-strong bg-surface px-4 text-sm font-medium text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink"
           >
             Clear filters
           </button>
@@ -221,7 +224,7 @@ export default function QuotationsPage({ quotations, selectedId, onOpen }: Props
       ) : (
         <>
           {/* Laptop: table */}
-          <div className="hidden overflow-hidden rounded-xl border border-line bg-surface shadow-sm md:block">
+          <div className="surface hidden overflow-hidden md:block">
             <table className="w-full table-fixed text-left text-sm">
               <thead className="table-head border-b border-line bg-surface-2">
                 <tr>
@@ -302,7 +305,7 @@ export default function QuotationsPage({ quotations, selectedId, onOpen }: Props
                     onClick={() => onOpen(q.id)}
                     aria-current={selected ? "true" : undefined}
                     className={
-                      "block w-full rounded-xl border p-4 text-left shadow-sm transition-colors " +
+                      "block w-full rounded-surface border p-4 text-left shadow-surface transition-colors " +
                       (selected
                         ? "border-accent bg-accent/10"
                         : "border-line bg-surface hover:bg-surface-2 active:bg-surface-2")

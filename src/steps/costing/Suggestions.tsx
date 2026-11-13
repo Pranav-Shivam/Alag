@@ -3,7 +3,7 @@ import { Plus, Sparkles, X } from "lucide-react";
 import { Button, Callout, Card, Chip, SectionTitle, SimulatedTag } from "../../components/ui";
 import { bomTotals, lineTotal, usd } from "../../studio/calc";
 import type { BomCategory, BomLine, RegionModifier } from "../../studio/types";
-import { ADDED_PREFIX, CATEGORY_LABEL, CATEGORY_ORDER, fmtQty, pct } from "./shared";
+import { ADDED_PREFIX, CATEGORY_LABEL, fmtQty, pct } from "./shared";
 
 /* Deterministic checks dressed as an AI helper. Prices always come from the price book table below, never from a model. */
 
@@ -21,7 +21,7 @@ interface Standard {
 }
 
 const STANDARD: Standard[] = [
-  { key: "paint", title: "Paint and polish", category: "finishing", item: "Paint and polish", unit: "litre", price: 28, share: 0.05, match: /paint|polish|lacquer|varnish/ },
+  { key: "paint", title: "Coating and finish", category: "finishing", item: "Coating and finish", unit: "litre", price: 28, share: 0.05, match: /paint|polish|lacquer|varnish|coating|finish/ },
   { key: "spray", title: "Spray finishing", category: "finishing", item: "Spray finishing", unit: "sq ft", price: 3.2, share: 0.03, match: /spray/ },
   { key: "hardware", title: "Screws and hardware", category: "hardware", item: "Screws, hinges, runners", unit: "lot", price: 95, share: 0.04, match: /screw|hinge|runner|hardware|fastener/ },
   { key: "glue", title: "Glue and adhesives", category: "hardware", item: "Glue and adhesives", unit: "kg", price: 18, share: 0.01, match: /glue|adhesive/ },
@@ -31,7 +31,7 @@ const STANDARD: Standard[] = [
 
 /** Typical share of the total cost per group. A group more than 15 percent away from this is worth a second look. */
 const TYPICAL_SHARE: Record<BomCategory, number> = {
-  wood: 0.34,
+  material: 0.34,
   labour: 0.22,
   manufacturing: 0.12,
   finishing: 0.09,
@@ -52,7 +52,8 @@ type Suggestion =
   | { kind: "missing"; id: string; title: string; detail: string; line: BomLine; reason: string }
   | { kind: "share"; id: string; title: string; detail: string };
 
-export default function Suggestions({ lines, region, onAdd }: { lines: BomLine[]; region: RegionModifier | undefined; onAdd: (line: BomLine, reason: string) => void }) {
+/** Checks one lane: only standard components and cost groups of `categories` are suggested. `lines` is the whole estimate, so shares stay against the full total. */
+export default function Suggestions({ lines, categories, region, onAdd }: { lines: BomLine[]; categories: BomCategory[]; region: RegionModifier | undefined; onAdd: (line: BomLine, reason: string) => void }) {
   const [dismissed, setDismissed] = useState<string[]>([]);
 
   const all = useMemo<Suggestion[]>(() => {
@@ -60,7 +61,7 @@ export default function Suggestions({ lines, region, onAdd }: { lines: BomLine[]
     if (lines.length === 0 || total <= 0) return [];
     const out: Suggestion[] = [];
 
-    for (const s of STANDARD) {
+    for (const s of STANDARD.filter((x) => categories.includes(x.category))) {
       const present = lines.some((l) => s.match.test(l.item.toLowerCase()) || (s.key === "transport" && l.category === "logistics") || (s.key === "installation" && l.category === "installation"));
       if (present) continue;
       const mod = modifierFor(s.category, region);
@@ -77,7 +78,7 @@ export default function Suggestions({ lines, region, onAdd }: { lines: BomLine[]
       });
     }
 
-    for (const cat of CATEGORY_ORDER) {
+    for (const cat of categories) {
       const group = lines.filter((l) => l.category === cat);
       if (group.length === 0) continue;
       const share = group.reduce((s, l) => s + lineTotal(l), 0) / total;
@@ -93,7 +94,7 @@ export default function Suggestions({ lines, region, onAdd }: { lines: BomLine[]
       }
     }
     return out;
-  }, [lines, region]);
+  }, [lines, categories, region]);
 
   const visible = all.filter((s) => !dismissed.includes(s.id));
   const hiddenCount = all.length - visible.length;
@@ -113,7 +114,7 @@ export default function Suggestions({ lines, region, onAdd }: { lines: BomLine[]
         ) : (
           <ul className="space-y-2">
             {visible.map((s) => (
-              <li key={s.id} className="rounded-lg border border-line bg-surface-2 p-3">
+              <li key={s.id} className="rounded-control border border-line bg-surface-2 p-3">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-sm font-medium text-ink">{s.title}</span>
                   <Chip tone={s.kind === "missing" ? "info" : "warn"}>{s.kind === "missing" ? "Missing component" : "Unusual share"}</Chip>

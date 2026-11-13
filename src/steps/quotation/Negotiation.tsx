@@ -102,7 +102,7 @@ export default function Negotiation({ quotation, cost, basePrice, locked }: Prop
 
 function Stat({ label, value, note, danger }: { label: string; value: string; note?: string; danger?: boolean }) {
   return (
-    <div className={`rounded-lg border p-2.5 ${danger ? "border-danger-line bg-danger-soft" : "border-line bg-surface-2"}`}>
+    <div className={`rounded-control border p-2.5 ${danger ? "border-danger-line bg-danger-soft" : "border-line bg-surface-2"}`}>
       <dt className="text-xs text-muted">{label}</dt>
       <dd className={`mt-0.5 text-sm font-medium tabular-nums ${danger ? "text-danger-fg" : "text-ink"}`}>{value}</dd>
       {note ? <dd className="mt-0.5 text-xs text-muted">{note}</dd> : null}

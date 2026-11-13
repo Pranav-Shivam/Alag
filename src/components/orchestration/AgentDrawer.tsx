@@ -77,7 +77,7 @@ export default function AgentDrawer({ row, onClose }: { row: AgentRow; onClose: 
         role="dialog"
         aria-modal="true"
         aria-labelledby="agent-drawer-title"
-        className="relative flex max-h-[88vh] w-full flex-col overflow-hidden rounded-t-2xl border border-line bg-surface shadow-lg lg:max-h-none lg:w-120 lg:rounded-none lg:border-y-0 lg:border-r-0"
+        className="relative flex max-h-[88vh] w-full flex-col overflow-hidden rounded-t-surface border border-line bg-surface shadow-raised lg:max-h-none lg:w-120 lg:rounded-none lg:border-y-0 lg:border-r-0"
       >
         <header className="flex items-start gap-3 border-b border-line p-4">
           <StepBadge id={step.id} />
@@ -118,7 +118,7 @@ export default function AgentDrawer({ row, onClose }: { row: AgentRow; onClose: 
             type="button"
             onClick={onClose}
             aria-label="Close summary"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-control text-muted transition-colors hover:bg-surface-2 hover:text-ink"
           >
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -127,14 +127,14 @@ export default function AgentDrawer({ row, onClose }: { row: AgentRow; onClose: 
         <div className="flex-1 space-y-5 overflow-y-auto p-4">
           <section className="space-y-2">
             <SectionTitle title="System prompt" hint="First lines of the live version" />
-            <div className="space-y-1 rounded-lg border border-line bg-surface-2 p-3 text-sm leading-relaxed text-ink-2">
+            <div className="space-y-1 rounded-control border border-line bg-surface-2 p-3 text-sm leading-relaxed text-ink-2">
               {promptLines.length === 0 ? <p className="text-muted">No system prompt written.</p> : promptLines.map((l, i) => <p key={i}>{l}</p>)}
             </div>
           </section>
 
           <section className="space-y-2">
             <SectionTitle title="Trust" hint={meta.blurb} />
-            <div className="rounded-lg border border-line p-3 text-sm">
+            <div className="rounded-control border border-line p-3 text-sm">
               <Chip tone={trust.tone}>{trust.label}</Chip>
               <p className="mt-2 text-ink-2">{row.trust.reason}</p>
               <p className="mt-1 text-xs text-muted">This is a recommendation from the evidence. A person decides, in the prompts editor.</p>
@@ -146,7 +146,7 @@ export default function AgentDrawer({ row, onClose }: { row: AgentRow; onClose: 
             {body.tools.length === 0 ? (
               <p className="text-sm text-muted">This agent has no tools.</p>
             ) : (
-              <ul className="divide-y divide-line rounded-lg border border-line">
+              <ul className="divide-y divide-line rounded-control border border-line">
                 {body.tools.map((t) => (
                   <li key={t.id} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2">
                     <div className="min-w-0">
@@ -174,7 +174,7 @@ export default function AgentDrawer({ row, onClose }: { row: AgentRow; onClose: 
             ) : (
               <ul className="space-y-1.5">
                 {row.rules.map((r) => (
-                  <li key={r.id} className="flex items-start gap-2 rounded-lg border border-line px-3 py-2 text-sm text-ink-2">
+                  <li key={r.id} className="flex items-start gap-2 rounded-control border border-line px-3 py-2 text-sm text-ink-2">
                     <Chip tone={r.severity === "critical" ? "danger" : "neutral"}>{SEVERITY_LABEL[r.severity]}</Chip>
                     <span className="min-w-0 flex-1">
                       {r.title}
@@ -191,7 +191,7 @@ export default function AgentDrawer({ row, onClose }: { row: AgentRow; onClose: 
             {lastRuns.length === 0 ? (
               <p className="text-sm text-muted">No runs yet.</p>
             ) : (
-              <ul className="divide-y divide-line rounded-lg border border-line">
+              <ul className="divide-y divide-line rounded-control border border-line">
                 {lastRuns.map(({ run, score }) => {
                   const verdict =
                     run.status === "failed"

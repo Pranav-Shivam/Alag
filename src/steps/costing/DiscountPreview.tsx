@@ -29,7 +29,7 @@ export default function DiscountPreview({ cost, price, rules, rulesVersion }: { 
           ["Margin after discount", pct(marginAfter, 1)],
           ["Gross profit after discount", usd(after - cost)],
         ].map(([k, v]) => (
-          <div key={k} className="min-w-0 rounded-lg border border-line bg-surface-2 p-2.5">
+          <div key={k} className="min-w-0 rounded-control border border-line bg-surface-2 p-2.5">
             <dt className="text-xs text-muted">{k}</dt>
             <dd className="break-words text-base font-semibold tabular-nums text-ink">{v}</dd>
           </div>

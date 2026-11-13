@@ -3,12 +3,12 @@ import { Check, PenLine, Plus, X } from "lucide-react";
 import { Button, Chip, Select, TextInput } from "../../components/ui";
 import { usd } from "../../studio/calc";
 import type { BomCategory, BomLine } from "../../studio/types";
-import { ADDED_PREFIX, CATEGORY_LABEL, CATEGORY_ORDER, MIN_NOTE_CHARS, parseNum } from "./shared";
+import { ADDED_PREFIX, CATEGORY_LABEL, MIN_NOTE_CHARS, parseNum } from "./shared";
 
-/** Adds a manual cost line. It has no calculated original, so the typed values become the calculated ones and the reason goes to the activity log. */
-export default function AddLineForm({ onAdd }: { onAdd: (line: BomLine, reason: string) => void }) {
+/** Adds a manual cost line to one of the given categories (the categories of the lane it sits in). It has no calculated original, so the typed values become the calculated ones and the reason goes to the activity log. */
+export default function AddLineForm({ categories, onAdd }: { categories: BomCategory[]; onAdd: (line: BomLine, reason: string) => void }) {
   const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState<BomCategory>("hardware");
+  const [category, setCategory] = useState<BomCategory>(categories[0]);
   const [item, setItem] = useState("");
   const [unit, setUnit] = useState("");
   const [qty, setQty] = useState("1");
@@ -65,17 +65,17 @@ export default function AddLineForm({ onAdd }: { onAdd: (line: BomLine, reason: 
         submit();
       }}
       aria-label="Add a cost line"
-      className="space-y-3 rounded-xl border border-line-strong bg-surface p-3 shadow-xs"
+      className="space-y-3 rounded-surface border border-line-strong bg-surface p-3 shadow-surface"
     >
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-sm font-semibold text-ink">Add a cost line</h3>
+        <h3 className="t-label">Add a cost line</h3>
         <Chip tone="violet" icon={PenLine}>
           Source: Manual
         </Chip>
       </div>
       <div className="grid grid-cols-1 gap-3 @sm:grid-cols-2">
         <Select label="Category" value={category} onChange={(e) => setCategory(e.target.value as BomCategory)}>
-          {CATEGORY_ORDER.map((c) => (
+          {categories.map((c) => (
             <option key={c} value={c}>
               {CATEGORY_LABEL[c]}
             </option>

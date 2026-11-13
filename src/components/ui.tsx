@@ -54,7 +54,7 @@ export function Chip({ tone = "neutral", icon: Icon, children, className = "" }:
 
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 const VARIANT: Record<Variant, string> = {
-  primary: "bg-mint text-mint-fg hover:bg-mint-hover border-transparent shadow-xs",
+  primary: "bg-mint text-mint-fg hover:bg-mint-hover border-transparent shadow-surface",
   secondary: "bg-surface text-ink border-line-strong hover:bg-surface-2",
   ghost: "bg-transparent text-ink-2 border-transparent hover:bg-surface-2",
   danger: "bg-danger-soft text-danger-fg border-danger-line hover:brightness-95",
@@ -74,7 +74,7 @@ export function Button({
       type="button"
       aria-busy={loading || undefined}
       {...rest}
-      className={`inline-flex items-center justify-center gap-1.5 rounded-lg border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+      className={`inline-flex items-center justify-center gap-1.5 rounded-control border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
         size === "sm" ? "min-h-8 px-2.5 text-xs" : "min-h-10 px-3.5 text-sm"
       } ${VARIANT[variant]} ${className}`}
     >
@@ -85,14 +85,27 @@ export function Button({
 }
 
 export function Card({ children, className = "", as: As = "section" }: { children: ReactNode; className?: string; as?: "section" | "div" | "article" }) {
-  return <As className={`rounded-xl border border-line bg-surface shadow-xs ${className}`}>{children}</As>;
+  return <As className={`surface ${className}`}>{children}</As>;
+}
+
+/** Intro under the app header: optional title (h2) and one sentence of description. The app header holds the page's h1. */
+export function PageHeader({ title, description, actions }: { title?: string; description: string; actions?: ReactNode }) {
+  return (
+    <header className="flex flex-wrap items-start justify-between gap-3">
+      <div className="min-w-0">
+        {title ? <h2 className="t-title">{title}</h2> : null}
+        <p className={`max-w-3xl text-sm text-muted ${title ? "mt-1" : ""}`}>{description}</p>
+      </div>
+      {actions}
+    </header>
+  );
 }
 
 export function SectionTitle({ title, hint, action }: { title: string; hint?: string; action?: ReactNode }) {
   return (
     <div className="flex items-start justify-between gap-3">
       <div className="min-w-0">
-        <h3 className="text-sm font-semibold text-ink">{title}</h3>
+        <h3 className="t-label">{title}</h3>
         {hint ? <p className="mt-0.5 text-xs text-muted">{hint}</p> : null}
       </div>
       {action}
@@ -102,7 +115,7 @@ export function SectionTitle({ title, hint, action }: { title: string; hint?: st
 
 export function Callout({ tone = "info", title, children, icon: Icon = Info, className = "" }: { tone?: Tone; title?: string; children?: ReactNode; icon?: IconType; className?: string }) {
   return (
-    <div role={tone === "danger" || tone === "alert" ? "alert" : "status"} className={`flex gap-2.5 rounded-lg border p-3 text-sm ${TONE[tone]} ${className}`}>
+    <div role={tone === "danger" || tone === "alert" ? "alert" : "status"} className={`flex gap-2.5 rounded-control border p-3 text-sm ${TONE[tone]} ${className}`}>
       <Icon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
       <div className="min-w-0">
         {title ? <div className="font-semibold">{title}</div> : null}
@@ -114,7 +127,7 @@ export function Callout({ tone = "info", title, children, icon: Icon = Info, cla
 
 export function Segmented<T extends string>({ value, onChange, options, label, className = "" }: { value: T; onChange: (v: T) => void; options: { id: T; label: string; icon?: IconType }[]; label: string; className?: string }) {
   return (
-    <div role="radiogroup" aria-label={label} className={`inline-flex max-w-full overflow-x-auto rounded-lg border border-line bg-surface-2 p-0.5 ${className}`}>
+    <div role="radiogroup" aria-label={label} className={`inline-flex max-w-full overflow-x-auto rounded-control border border-line bg-surface-2 p-0.5 ${className}`}>
       {options.map((o) => {
         const active = o.id === value;
         return (
@@ -124,8 +137,8 @@ export function Segmented<T extends string>({ value, onChange, options, label, c
             role="radio"
             aria-checked={active}
             onClick={() => onChange(o.id)}
-            className={`inline-flex min-h-8 items-center gap-1.5 whitespace-nowrap rounded-md px-3 text-xs font-medium transition-colors ${
-              active ? "bg-surface text-ink shadow-xs ring-1 ring-line" : "text-muted hover:text-ink"
+            className={`inline-flex min-h-8 items-center gap-1.5 whitespace-nowrap rounded-chip px-3 text-xs font-medium transition-colors ${
+              active ? "bg-surface text-ink shadow-surface ring-1 ring-line" : "text-muted hover:text-ink"
             }`}
           >
             {o.icon ? <o.icon className="h-3.5 w-3.5" aria-hidden="true" /> : null}
@@ -148,12 +161,12 @@ export function Switch({ checked, onChange, label, disabled }: { checked: boolea
       onClick={() => onChange(!checked)}
       className={`relative h-6 w-10 shrink-0 rounded-full border transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${checked ? "border-transparent bg-accent" : "border-line-strong bg-surface-2"}`}
     >
-      <span className={`absolute top-0.5 h-4.5 w-4.5 rounded-full bg-surface shadow-sm ring-1 ring-line transition-all ${checked ? "left-[1.1rem]" : "left-0.5"}`} />
+      <span className={`absolute top-0.5 h-4.5 w-4.5 rounded-full bg-surface shadow-surface ring-1 ring-line transition-all ${checked ? "left-[1.1rem]" : "left-0.5"}`} />
     </button>
   );
 }
 
-const FIELD = "w-full rounded-lg border border-line-strong bg-surface px-3 text-sm text-ink placeholder:text-muted transition-colors hover:border-muted focus:border-ring disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted";
+const FIELD = "w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink placeholder:text-muted transition-colors hover:border-muted focus:border-ring disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted";
 
 export function Field({ label, hint, error, children, htmlFor }: { label: string; hint?: string; error?: string; children: ReactNode; htmlFor?: string }) {
   return (

@@ -26,7 +26,7 @@ export default function QuotePreview({ quotation, draft, figures, earlyPct, appl
     <section aria-label="Quotation preview" className="space-y-3">
       <SectionTitle title="Quotation preview" hint="This is what the customer receives. Prices come from the pricing engine." />
 
-      <div className="flex items-center justify-between gap-3 rounded-lg border border-line bg-surface px-3 py-2">
+      <div className="flex items-center justify-between gap-3 rounded-control border border-line bg-surface px-3 py-2">
         <span id="early-label" className="min-w-0 text-sm text-ink-2">
           Show the early payment discount of <span className="tabular-nums">{earlyPct}%</span> for advance payment
         </span>
@@ -37,7 +37,7 @@ export default function QuotePreview({ quotation, draft, figures, earlyPct, appl
         <header className="flex flex-wrap items-start justify-between gap-3 border-b border-line bg-surface-2 px-4 py-3">
           <div>
             <div className="text-lg font-semibold tracking-widest text-ink">ALAG</div>
-            <div className="text-xs text-muted">Custom wooden furniture and interiors</div>
+            <div className="text-xs text-muted">Made-to-order products and installation</div>
           </div>
           <div className="text-xs text-ink-2 @md:text-right">
             <div className="text-sm font-semibold tabular-nums text-ink">Quotation {quotation.id}</div>
@@ -67,7 +67,7 @@ export default function QuotePreview({ quotation, draft, figures, earlyPct, appl
           ) : null}
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wide text-muted">Scope and price</h4>
+            <h4 className="t-eyebrow">Scope and price</h4>
             {figures.groups.length === 0 ? (
               <p className="mt-2 text-sm text-muted">{PENDING}. No cost lines exist yet.</p>
             ) : (
@@ -104,7 +104,7 @@ export default function QuotePreview({ quotation, draft, figures, earlyPct, appl
             </div>
           </dl>
 
-          <div className="rounded-lg bg-surface-2 p-3 text-sm">
+          <div className="rounded-control bg-surface-2 p-3 text-sm">
             <div className="text-xs font-medium text-muted">Payment terms</div>
             <p className="mt-0.5 text-ink">{draft.paymentTerms}</p>
           </div>

@@ -100,7 +100,7 @@ function RuleCard({ rule, stat }: { rule: SpecRule; stat: RuleStat }) {
       ) : (
         <>
           <div className="flex flex-wrap items-start justify-between gap-2">
-            <h4 className="min-w-0 flex-1 text-sm font-semibold text-ink">{rule.title}</h4>
+            <h4 className="t-label min-w-0 flex-1">{rule.title}</h4>
             <div className="flex flex-wrap gap-1.5">
               <Chip tone={rule.severity === "critical" ? "danger" : "neutral"}>{SEVERITY_LABEL[rule.severity]}</Chip>
               <Chip tone="info">{METHOD_LABEL[rule.method]}</Chip>
@@ -284,8 +284,8 @@ export default function BehaviorSpecsTab({ stepId, onStepChange }: { stepId: num
                     type="button"
                     aria-current={active ? "true" : undefined}
                     onClick={() => onStepChange(r.step.id)}
-                    className={`flex w-full items-center gap-2 rounded-lg border px-2.5 py-2 text-left text-sm transition-colors ${
-                      active ? "border-line bg-surface font-medium text-ink shadow-xs ring-1 ring-line" : "border-transparent text-muted hover:bg-surface-2 hover:text-ink"
+                    className={`flex w-full items-center gap-2 rounded-control border px-2.5 py-2 text-left text-sm transition-colors ${
+                      active ? "border-line bg-surface font-medium text-ink shadow-surface ring-1 ring-line" : "border-transparent text-muted hover:bg-surface-2 hover:text-ink"
                     }`}
                   >
                     <StepBadge id={r.step.id} />
@@ -301,7 +301,7 @@ export default function BehaviorSpecsTab({ stepId, onStepChange }: { stepId: num
         <div className="min-w-0 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="min-w-0">
-              <h3 className="text-base font-semibold text-ink">{step.agent}</h3>
+              <h3 className="t-section">{step.agent}</h3>
               <p aria-live="polite" className="text-xs tabular-nums text-muted">
                 {row.rules.length} {row.rules.length === 1 ? "rule" : "rules"}, {row.critical} critical
               </p>

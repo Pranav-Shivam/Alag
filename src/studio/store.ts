@@ -11,6 +11,7 @@ import type {
   Attachment,
   BomLine,
   ClarificationDraft,
+  EstimateLanes,
   ExtractedField,
   ExtractionResult,
   FieldState,
@@ -86,6 +87,8 @@ export interface StudioState {
   setClarification: (qid: string, draft: ClarificationDraft | null) => void;
   sendClarification: (qid: string) => void;
   setBomOverride: (qid: string, lineId: string, override: BomLine["override"] | null) => void;
+  /** Confirms or reopens one Estimate Desk lane. Procurement needs manufacturing first, and reopening manufacturing reopens procurement. */
+  setLaneConfirmed: (qid: string, lane: keyof EstimateLanes, confirmed: boolean) => void;
   addBomLine: (qid: string, line: BomLine) => void;
   removeBomLine: (qid: string, lineId: string) => void;
   setMargin: (qid: string, patch: Partial<MarginDecision>) => void;
@@ -221,6 +224,14 @@ export const useStudio = create<StudioState>()(
             const next = { ...c, bom: c.bom.map((l) => (l.id === lineId ? { ...l, override: override ?? undefined } : l)) };
             return line ? event(next, { stepId: 4, actor: "Human", who: "You", text: override ? `Overrode ${line.item}: ${override.reason}` : `Reset ${line.item} to the price book` }) : c;
           }),
+        setLaneConfirmed: (qid, lane, confirmed) =>
+          withCase(qid, (c) => {
+            if (c.lanes[lane] === confirmed) return c;
+            if (lane === "procurement" && confirmed && !c.lanes.manufacturing) return c;
+            const lanes = lane === "manufacturing" && !confirmed ? { manufacturing: false, procurement: false } : { ...c.lanes, [lane]: confirmed };
+            const name = lane === "manufacturing" ? "Manufacturing" : "Procurement";
+            return event({ ...c, lanes }, { stepId: 4, actor: "Human", who: "You", text: confirmed ? `Confirmed ${name.toLowerCase()} input for the estimate` : `Reopened ${name.toLowerCase()} input${lane === "manufacturing" ? ", procurement input reopened too" : ""}` });
+          }),
         addBomLine: (qid, line) => withCase(qid, (c) => event({ ...c, bom: [...c.bom, line] }, { stepId: 4, actor: "Human", who: "You", text: `Added cost line ${line.item}` })),
         removeBomLine: (qid, lineId) => withCase(qid, (c) => ({ ...c, bom: c.bom.filter((l) => l.id !== lineId) })),
         setMargin: (qid, patch) =>
@@ -232,8 +243,8 @@ export const useStudio = create<StudioState>()(
       };
     },
     {
-      name: "alag-studio-v1",
-      version: 1,
+      name: "alag-studio-v2",
+      version: 2,
       partialize: (s) => ({ agents: s.agents, rules: s.rules, cases: s.cases }),
       // Object URLs of uploaded files do not survive a reload. Drop those attachments instead of showing broken links.
       merge: (persisted, current) => {

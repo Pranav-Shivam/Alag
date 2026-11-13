@@ -145,7 +145,7 @@ export default function ScoringRules({ runs, rules, scored, scoring }: Props) {
               A run passes only when no critical rule failed, the score is at least {fmtCredit(cfg.passScore)}, and the run itself did not fail.
             </li>
           </ol>
-          <pre className="mt-3 whitespace-pre-wrap break-words rounded-lg border border-line bg-surface-2 p-3 font-mono text-xs leading-relaxed text-ink">
+          <pre className="mt-3 whitespace-pre-wrap break-words rounded-control border border-line bg-surface-2 p-3 font-mono text-xs leading-relaxed text-ink">
 {`score = 100 × sum(weight × credit) / sum(weight)
 
 credit  pass = 1, warn = ${fmtCredit(cfg.warnCredit)}, fail = 0
@@ -162,7 +162,7 @@ passes  = no critical rule failed
         <Card className="min-w-0 p-4">
           <SectionTitle title="Settings" hint="Edit, check the preview, then save. Every score on this screen follows the saved values." />
           <div className="mt-3 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">{SCORE_FIELDS.map(field)}</div>
-          <h4 className="mt-4 text-xs font-semibold uppercase tracking-wide text-muted">Trust model</h4>
+          <h4 className="t-eyebrow mt-4">Trust model</h4>
           <p className="mt-0.5 text-xs text-muted">An agent is a candidate for more autonomy only when all promotion rules hold. A person always makes the change.</p>
           <div className="mt-2 grid gap-3 sm:grid-cols-2">{TRUST_FIELDS.map(field)}</div>
           <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -217,7 +217,7 @@ passes  = no critical rule failed
 
 function WhatIfTile({ label, value, hint, tone }: { label: string; value: string; hint: string; tone: "neutral" | "ok" | "danger" }) {
   return (
-    <div className="rounded-lg border border-line bg-surface-2 p-3">
+    <div className="rounded-control border border-line bg-surface-2 p-3">
       <div className="text-xs font-medium text-muted">{label}</div>
       <div className={`mt-0.5 text-2xl font-semibold tabular-nums ${tone === "neutral" ? "text-ink" : TONE_TEXT[tone]}`}>{value}</div>
       <div className="text-xs text-muted">{hint}</div>
@@ -256,7 +256,7 @@ function WorkedExample({ run, rules, cfg }: { run: AgentRun; rules: SpecRule[]; 
 
       <ul className="mt-3 space-y-2 sm:hidden">
         {r.lines.map((l) => (
-          <li key={l.check.ruleId} className="rounded-lg border border-line p-2.5">
+          <li key={l.check.ruleId} className="rounded-control border border-line p-2.5">
             <div className="text-sm font-medium text-ink">{l.rule?.title ?? l.check.ruleId}</div>
             <div className="mt-1 flex flex-wrap gap-1.5">
               {l.rule ? <SeverityChip severity={l.rule.severity} /> : null}
@@ -299,7 +299,7 @@ function WorkedExample({ run, rules, cfg }: { run: AgentRun; rules: SpecRule[]; 
         </table>
       </div>
 
-      <pre className="mt-3 whitespace-pre-wrap break-words rounded-lg border border-line bg-surface-2 p-3 font-mono text-xs leading-relaxed tabular-nums text-ink">
+      <pre className="mt-3 whitespace-pre-wrap break-words rounded-control border border-line bg-surface-2 p-3 font-mono text-xs leading-relaxed tabular-nums text-ink">
 {`sum(weight × credit) = ${num(sumWC)}
 sum(weight)          = ${num(sumW)}
 score = 100 × ${num(sumWC)} / ${num(sumW)} = ${r.score === null ? "n/a" : r.score.toFixed(1)}

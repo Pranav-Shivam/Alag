@@ -114,7 +114,7 @@ export default function AddAttachments({ attachments, onAdd, onMessage }: Props)
           {matches.length === 1 ? "1 match" : `${matches.length} matches`}
         </p>
         {matches.length === 0 ? (
-          <div className="mt-2 flex items-start gap-2 rounded-lg border border-dashed border-line-strong bg-surface-2 p-4 text-sm text-muted">
+          <div className="mt-2 flex items-start gap-2 rounded-control border border-dashed border-line-strong bg-surface-2 p-4 text-sm text-muted">
             <SearchX className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
             <div>
               <div className="font-medium text-ink-2">Nothing in the library matches that.</div>
@@ -126,7 +126,7 @@ export default function AddAttachments({ attachments, onAdd, onMessage }: Props)
             {matches.map((l) => {
               const attached = attachedIds.has(`att-${l.id}`);
               return (
-                <li key={l.id} className="flex min-w-0 items-start gap-3 rounded-lg border border-line p-2.5">
+                <li key={l.id} className="flex min-w-0 items-start gap-3 rounded-control border border-line p-2.5">
                   <AttachmentThumb item={{ mime: l.mime, url: `${import.meta.env.BASE_URL}samples/${l.file}`, title: l.title, pages: l.pages }} className="h-14 w-14" />
                   <div className="min-w-0 flex-1">
                     <div className="break-words text-sm font-medium text-ink">{l.title}</div>
@@ -156,7 +156,7 @@ export default function AddAttachments({ attachments, onAdd, onMessage }: Props)
 
       {/* Upload */}
       <div className="mt-5 border-t border-line pt-4">
-        <h4 className="text-sm font-semibold text-ink">Upload a file</h4>
+        <h4 className="t-label">Upload a file</h4>
         <div
           onDragOver={(e) => {
             e.preventDefault();
@@ -164,7 +164,7 @@ export default function AddAttachments({ attachments, onAdd, onMessage }: Props)
           }}
           onDragLeave={() => setDragging(false)}
           onDrop={onDrop}
-          className={`mt-2 flex flex-col items-center gap-2 rounded-xl border-2 border-dashed p-5 text-center transition-colors ${
+          className={`mt-2 flex flex-col items-center gap-2 rounded-surface border-2 border-dashed p-5 text-center transition-colors ${
             dragging ? "border-ring bg-warn-soft" : "border-line-strong bg-surface-2"
           }`}
         >

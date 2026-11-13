@@ -19,7 +19,7 @@ interface Props {
 /** Compact chip for the dense rail. */
 function MiniChip({ tone, icon: Icon, children }: { tone: Tone; icon?: typeof Info; children: ReactNode }) {
   return (
-    <span className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-1.5 py-px text-[10px] font-semibold leading-4 ${TONE[tone]}`}>
+    <span className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-1.5 py-px text-2xs font-semibold leading-4 ${TONE[tone]}`}>
       {Icon ? <Icon className="h-2.5 w-2.5" aria-hidden="true" /> : null}
       {children}
     </span>
@@ -74,7 +74,7 @@ function StepRow({
         onClick={() => onSelect(step.id)}
         aria-current={selected ? "step" : undefined}
         aria-label={label}
-        className={`relative flex w-full items-stretch gap-3 rounded-lg px-2 py-2 text-left transition-colors ${
+        className={`relative flex w-full items-stretch gap-3 rounded-control px-2 py-2 text-left transition-colors ${
           selected ? "bg-surface-2 ring-1 ring-inset ring-accent" : "hover:bg-surface-2"
         } ${dimmed ? "opacity-70" : ""}`}
       >
@@ -87,12 +87,12 @@ function StepRow({
         </span>
         <span className="min-w-0 flex-1">
           <span className="flex items-baseline gap-1.5">
-            <span className="w-4 shrink-0 text-right text-[11px] font-medium tabular-nums text-muted">{step.id}</span>
+            <span className="w-4 shrink-0 text-right text-2xs font-medium tabular-nums text-muted">{step.id}</span>
             <span className={`text-sm font-semibold leading-snug ${dimmed ? "text-muted" : "text-ink"}`}>{step.name}</span>
           </span>
           <span className="mt-0.5 block pl-[22px] text-xs leading-snug text-muted">{step.agent}</span>
           <span className="mt-1.5 flex flex-wrap items-center gap-1 pl-[22px]">
-            <span className={`mr-0.5 text-[11px] font-semibold ${TONE_TEXT[STATUS_TONE[status]]}`}>{STEP_STATUS_LABEL[status]}</span>
+            <span className={`mr-0.5 text-2xs font-semibold ${TONE_TEXT[STATUS_TONE[status]]}`}>{STEP_STATUS_LABEL[status]}</span>
             {step.tech.map((t) => (
               <MiniChip key={t} tone={TECH_TONE[t]}>
                 {t}
@@ -126,13 +126,13 @@ function Branch({
   const box =
     tone === "ok" ? TONE.ok : tone === "danger" ? TONE.danger : tone === "open" ? "border-line bg-surface text-ink-2" : "border-dashed border-line bg-surface text-muted opacity-70";
   return (
-    <div className={`rounded-lg border p-2 ${box}`}>
+    <div className={`rounded-control border p-2 ${box}`}>
       <div className="flex items-center justify-between gap-2">
         <span className="flex items-center gap-1.5 text-xs font-semibold">
           <Icon className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden="true" />
           {title}
         </span>
-        <span className="text-[10px] font-semibold uppercase tracking-wide">{state}</span>
+        <span className="text-2xs font-semibold uppercase tracking-wide">{state}</span>
       </div>
       <p className="mt-0.5 text-xs leading-snug">{note}</p>
     </div>
@@ -151,7 +151,7 @@ function Fork({ quotation, lineClass }: { quotation: Quotation; lineClass: strin
             <GitBranch className="h-4 w-4" />
           </span>
         </span>
-        <div className="min-w-0 flex-1 rounded-xl border border-line bg-surface-2 p-2.5">
+        <div className="min-w-0 flex-1 rounded-surface border border-line bg-surface-2 p-2.5">
           <p className="text-sm font-semibold text-ink">Customer decision</p>
           <p className="mt-0.5 text-xs text-muted">
             {outcome === "in_progress" ? "The customer has not decided yet." : outcome === "awarded" ? "The customer awarded the quotation." : "The customer rejected the quotation."}

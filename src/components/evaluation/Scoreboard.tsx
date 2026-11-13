@@ -138,7 +138,7 @@ export default function Scoreboard({ scored, runs, rules, scoring, onOpenAgent }
         <button
           type="button"
           onClick={() => toggle(k)}
-          className={`inline-flex items-center gap-1 rounded text-xs font-medium hover:text-ink ${active ? "text-ink" : "text-muted"} ${align === "right" ? "flex-row-reverse" : ""}`}
+          className={`inline-flex items-center gap-1 rounded-chip text-xs font-medium hover:text-ink ${active ? "text-ink" : "text-muted"} ${align === "right" ? "flex-row-reverse" : ""}`}
         >
           {label}
           {active ? sort.dir === "asc" ? <ArrowUp className="h-3 w-3" aria-hidden="true" /> : <ArrowDown className="h-3 w-3" aria-hidden="true" /> : <ChevronsUpDown className="h-3 w-3 opacity-60" aria-hidden="true" />}
@@ -240,7 +240,7 @@ export default function Scoreboard({ scored, runs, rules, scoring, onOpenAgent }
         </div>
         <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:hidden" aria-live="polite">
           {rows.map((r) => (
-            <article key={r.stepId} className="rounded-lg border border-line p-3">
+            <article key={r.stepId} className="rounded-control border border-line p-3">
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
                   <div className="text-sm font-semibold text-ink">
@@ -295,7 +295,7 @@ export default function Scoreboard({ scored, runs, rules, scoring, onOpenAgent }
               {rows.map((r) => (
                 <tr key={r.stepId} onClick={() => onOpenAgent(r.stepId)} className="cursor-pointer border-b border-line align-top last:border-b-0 hover:bg-surface-2">
                   <td className="px-2 py-2.5">
-                    <button type="button" onClick={(e) => { e.stopPropagation(); onOpenAgent(r.stepId); }} className="rounded text-left" aria-label={`View runs for ${r.agent}`}>
+                    <button type="button" onClick={(e) => { e.stopPropagation(); onOpenAgent(r.stepId); }} className="rounded-chip text-left" aria-label={`View runs for ${r.agent}`}>
                       <div className="text-sm font-semibold text-ink">
                         <span className="tabular-nums text-muted">{r.stepId}.</span> {r.agent}
                       </div>

@@ -13,7 +13,7 @@ const FINISHES = ["Natural polish", "Matte lacquer", "Walnut stain", "Spray, whi
 /** Where each field sits on a page, normalised 0..1 as [x, y, width, height]. */
 const BOXES: Record<string, [number, number, number, number]> = {
   product_type: [0.08, 0.06, 0.5, 0.05],
-  wood_type: [0.1, 0.14, 0.3, 0.04],
+  material_type: [0.1, 0.14, 0.3, 0.04],
   length_in: [0.16, 0.42, 0.34, 0.05],
   width_in: [0.58, 0.58, 0.26, 0.05],
   height_in: [0.7, 0.28, 0.2, 0.05],
@@ -82,7 +82,7 @@ export function simulateExtraction(quotation: Quotation, attachments: Attachment
 
   const rows: Row[] = [
     { key: "product_type", label: "Product", value: quotation.product.replace(/\s*\(.*\)/, ""), required: true, confidence: 97 },
-    { key: "wood_type", label: "Wood type", value: quotation.material, required: true, confidence: 94 },
+    { key: "material_type", label: "Material", value: quotation.material, required: true, confidence: 94 },
     {
       key: "length_in",
       label: "Length",
@@ -127,7 +127,7 @@ export function simulatePartialExtraction(quotation: Quotation, attachments: Att
   const [L, W] = dims(quotation.product, n);
   const rows: Row[] = [
     { key: "product_type", label: "Product", value: quotation.product.replace(/\s*\(.*\)/, ""), required: true, confidence: 91 },
-    { key: "wood_type", label: "Wood type", value: quotation.material, required: true, confidence: 88 },
+    { key: "material_type", label: "Material", value: quotation.material, required: true, confidence: 88 },
     { key: "length_in", label: "Length", value: String(L), unit: "in", required: true, confidence: 63, note: "The dimension line is faint and part of the figure is cut off by the skew." },
     { key: "width_in", label: "Width", value: String(W), unit: "in", required: true, confidence: 58, note: "The figure could be read two ways because the scan is blurred." },
     { key: "height_in", label: "Height", value: null, unit: "in", required: true, confidence: null, note: "No printed dimension line for height. Handwriting was ignored on this run." },

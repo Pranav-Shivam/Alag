@@ -62,7 +62,7 @@ export default function Step1Email({ quotation }: CaseProps) {
         <div className="border-b border-line bg-surface-2 px-4 py-3">
           <div className="flex items-start gap-2">
             <Mail className="mt-0.5 h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
-            <h3 className="break-words text-sm font-semibold text-ink">{email.subject}</h3>
+            <h3 className="t-label break-words">{email.subject}</h3>
           </div>
           <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs">
             <dt className="text-muted">From</dt>

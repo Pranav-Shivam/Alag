@@ -211,7 +211,7 @@ export function VerdictSummary({ s }: { s: RunScore }) {
 
 export function Kpi({ label, value, hint, icon: Icon, tone = "neutral" }: { label: string; value: string; hint?: string; icon: LucideIcon; tone?: Tone }) {
   return (
-    <div className="min-w-0 rounded-xl border border-line bg-surface p-3 shadow-xs">
+    <div className="surface min-w-0 p-3">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 text-xs font-medium text-muted">{label}</div>
         <Icon className={`h-4 w-4 shrink-0 ${TONE_TEXT[tone]}`} aria-hidden="true" />
@@ -224,7 +224,7 @@ export function Kpi({ label, value, hint, icon: Icon, tone = "neutral" }: { labe
 
 export function EmptyState({ title, children }: { title: string; children?: ReactNode }) {
   return (
-    <div className="rounded-xl border border-dashed border-line-strong bg-surface p-8 text-center">
+    <div className="rounded-surface border border-dashed border-line-strong bg-surface p-8 text-center">
       <div className="text-sm font-semibold text-ink">{title}</div>
       {children ? <div className="mx-auto mt-1 max-w-md text-sm text-muted">{children}</div> : null}
     </div>

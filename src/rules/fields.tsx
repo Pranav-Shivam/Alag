@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 /* Small form controls used by the rules editor. Colors are semantic tokens only. */
 
 const INPUT =
-  "w-full min-h-10 rounded-lg border border-line-strong bg-surface text-sm text-ink tabular-nums transition-colors hover:border-muted focus:border-ring disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted";
+  "w-full min-h-10 rounded-control border border-line-strong bg-surface text-sm text-ink tabular-nums transition-colors hover:border-muted focus:border-ring disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted";
 
 /** Label for a table cell: visible on narrow (stacked card), screen reader only on wide (header row shows it). */
 export const CELL_LABEL = "mb-1 block text-xs font-medium text-ink-2 @md:sr-only";
@@ -162,7 +162,7 @@ export function SelectField({
         value={value}
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
-        className="min-h-10 w-full rounded-lg border border-line-strong bg-surface px-3 text-sm text-ink transition-colors hover:border-muted focus:border-ring disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted"
+        className="min-h-10 w-full rounded-control border border-line-strong bg-surface px-3 text-sm text-ink transition-colors hover:border-muted focus:border-ring disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted"
       >
         {opts.map((o) => (
           <option key={o} value={o}>

@@ -68,12 +68,12 @@ function AgentEditor({ stepId }: AgentTabProps) {
 
   return (
     <div className="space-y-4">
-      <div className="sticky top-0 z-10 rounded-xl border border-line bg-surface p-3 shadow-xs">
+      <div className="surface sticky top-0 z-10 p-3">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <Bot className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
-              <h2 className="truncate text-sm font-semibold text-ink">{step?.agent ?? `Step ${stepId} agent`}</h2>
+              <h2 className="t-label truncate">{step?.agent ?? `Step ${stepId} agent`}</h2>
             </div>
             <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
               <Chip tone="ok">{`Live v${agent.version}`}</Chip>

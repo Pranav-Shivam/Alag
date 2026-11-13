@@ -47,10 +47,10 @@ export default function FieldRow(p: FieldRowProps) {
       aria-label={`${f.label}, ${meta.label}`}
       data-field={f.key}
       onClick={p.onSelect}
-      className={`rounded-xl border bg-surface p-3 shadow-xs transition-colors ${p.selected ? "border-ring ring-2 ring-ring/40" : "border-line hover:border-line-strong"}`}
+      className={`rounded-surface border bg-surface p-3 shadow-surface transition-colors ${p.selected ? "border-ring ring-2 ring-ring/40" : "border-line hover:border-line-strong"}`}
     >
       <div className="flex items-start gap-2.5">
-        <span className={`mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg border ${TONE[meta.tone]}`}>
+        <span className={`mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-control border ${TONE[meta.tone]}`}>
           <Icon className="h-4 w-4" aria-hidden="true" />
         </span>
         <div className="min-w-0 flex-1">
@@ -75,7 +75,7 @@ export default function FieldRow(p: FieldRowProps) {
                 }}
                 aria-label={`Edit ${f.label}`}
                 title="Click to edit"
-                className="min-w-0 max-w-full rounded-md px-1 py-0.5 text-left hover:bg-surface-2"
+                className="min-w-0 max-w-full rounded-chip px-1 py-0.5 text-left hover:bg-surface-2"
               >
                 {hasValue ? (
                   <>

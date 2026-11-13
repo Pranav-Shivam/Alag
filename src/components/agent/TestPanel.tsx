@@ -75,7 +75,7 @@ function SingleResult({ title, r }: { title: string; r: SimResult }) {
 function Lines({ lines, tone }: { lines: { text: string; changed: boolean }[]; tone: "danger" | "ok" }) {
   const hi = tone === "danger" ? "bg-danger-soft text-danger-fg" : "bg-ok-soft text-ok-fg";
   return (
-    <pre tabIndex={0} className="max-h-80 overflow-auto rounded-lg border border-line bg-surface-2 py-2 font-mono text-xs leading-relaxed text-ink">
+    <pre tabIndex={0} className="max-h-80 overflow-auto rounded-control border border-line bg-surface-2 py-2 font-mono text-xs leading-relaxed text-ink">
       {lines.map((l, i) => (
         <div key={i} className={`whitespace-pre-wrap break-words px-3 ${l.changed ? hi : ""}`}>
           {l.changed ? (tone === "danger" ? "- " : "+ ") : "  "}
@@ -170,7 +170,7 @@ export default function TestPanel({ stepName, live, draft }: Props) {
 
       <div aria-live="polite" aria-busy={!!running}>
         {running ? (
-          <div className="flex items-center gap-2 rounded-lg border border-line bg-surface-2 p-3 text-sm text-ink-2">
+          <div className="flex items-center gap-2 rounded-control border border-line bg-surface-2 p-3 text-sm text-ink-2">
             <AppLoader variant="icon" size="xs" />
             Running a simulated test
           </div>

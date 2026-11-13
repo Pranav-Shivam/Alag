@@ -59,7 +59,7 @@ export function NeedsAttention({ reason }: { reason?: string }) {
   return (
     <span
       title={reason}
-      className="inline-flex items-center gap-1 rounded-md bg-alert-soft px-1.5 py-0.5 text-xs font-medium text-alert-fg ring-1 ring-inset ring-alert-line"
+      className="inline-flex items-center gap-1 rounded-chip bg-alert-soft px-1.5 py-0.5 text-xs font-medium text-alert-fg ring-1 ring-inset ring-alert-line"
     >
       <TriangleAlert className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       Needs attention

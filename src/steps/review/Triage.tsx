@@ -111,7 +111,7 @@ export function ShortcutsPanel({ onClose }: { onClose: () => void }) {
     <Card className="p-3" as="div">
       <div id="review-shortcuts" role="region" aria-label="Keyboard shortcuts">
         <div className="flex items-center justify-between gap-2">
-          <h3 className="text-sm font-semibold text-ink">Keyboard shortcuts</h3>
+          <h3 className="t-label">Keyboard shortcuts</h3>
           <Button size="sm" variant="ghost" icon={X} onClick={onClose} aria-label="Close shortcuts" />
         </div>
         <p className="mt-0.5 text-xs text-muted">They work while focus is in the field list and not in a text box.</p>
@@ -119,7 +119,7 @@ export function ShortcutsPanel({ onClose }: { onClose: () => void }) {
           {KEYS.map(([k, what]) => (
             <div key={k} className="flex items-center gap-2">
               <dt>
-                <kbd className="whitespace-nowrap rounded-md border border-line-strong bg-surface-2 px-1.5 py-0.5 font-mono text-xs text-ink">{k}</kbd>
+                <kbd className="whitespace-nowrap rounded-chip border border-line-strong bg-surface-2 px-1.5 py-0.5 font-mono text-xs text-ink">{k}</kbd>
               </dt>
               <dd className="text-xs text-ink-2">{what}</dd>
             </div>

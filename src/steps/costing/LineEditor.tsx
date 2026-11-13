@@ -44,7 +44,7 @@ export default function LineEditor({ line, onSave, onCancel }: { line: BomLine; 
         save();
       }}
       aria-label={`Edit ${line.item}`}
-      className="space-y-3 rounded-lg border border-line-strong bg-surface-2 p-3"
+      className="space-y-3 rounded-control border border-line-strong bg-surface-2 p-3"
     >
       <div className="text-sm font-semibold text-ink">Override {line.item}</div>
       <p className="text-xs text-muted">
@@ -74,7 +74,7 @@ export default function LineEditor({ line, onSave, onCancel }: { line: BomLine; 
         placeholder="For example: Supplier quote 2 Nov, 8 percent above the price book"
       />
 
-      <div aria-live="polite" className="rounded-lg border border-line bg-surface p-2.5 text-sm">
+      <div aria-live="polite" className="rounded-control border border-line bg-surface p-2.5 text-sm">
         {newTotal === null || delta === null ? (
           <span className="text-muted">Enter a valid quantity and price to see the new total.</span>
         ) : (

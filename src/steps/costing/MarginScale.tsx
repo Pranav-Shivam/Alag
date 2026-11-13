@@ -41,11 +41,11 @@ export default function MarginScale({ value, onChange, minPct, recommendedPct, b
       </div>
       <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-2">
         <li className="flex items-center gap-1.5">
-          <span className="h-2.5 w-4 rounded-sm bg-danger-line" aria-hidden="true" />
+          <span className="h-2.5 w-4 rounded-chip bg-danger-line" aria-hidden="true" />
           Below the minimum margin {pct(minPct, 1)}
         </li>
         <li className="flex items-center gap-1.5">
-          <span className="h-2.5 w-4 rounded-sm bg-ok-line" aria-hidden="true" />
+          <span className="h-2.5 w-4 rounded-chip bg-ok-line" aria-hidden="true" />
           Tolerance band {pct(lo, 1)} to {pct(hi, 1)}
         </li>
         <li className="flex items-center gap-1.5">

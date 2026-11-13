@@ -38,7 +38,7 @@ function defaultTab(hasCase: boolean, status: StepStatus): InspectorTab {
 function TabMark({ tone, text, count }: { tone?: "warn" | "danger" | "info"; text?: string; count?: number }) {
   if (count !== undefined) {
     return (
-      <span className="rounded-full bg-surface-2 px-1.5 text-[11px] font-medium tabular-nums text-muted ring-1 ring-line">
+      <span className="rounded-full bg-surface-2 px-1.5 text-2xs font-medium tabular-nums text-muted ring-1 ring-line">
         {count}
         <span className="sr-only"> events</span>
       </span>
@@ -115,7 +115,7 @@ export default function Inspector({ quotation, stepId, status, onClose, titleId,
       <header className="shrink-0 border-b border-line px-4 pb-3 pt-3">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-[11px] font-semibold uppercase tracking-wider tabular-nums text-muted">
+            <p className="t-eyebrow tabular-nums">
               Step {step.id} of {STEPS.length}
             </p>
             <h2 id={titleId} className="mt-0.5 text-lg font-semibold leading-snug tracking-tight text-ink">
@@ -132,7 +132,7 @@ export default function Inspector({ quotation, stepId, status, onClose, titleId,
             type="button"
             onClick={onClose}
             aria-label={`Close step ${step.id} panel`}
-            className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border border-line text-muted transition-colors hover:bg-surface-2 hover:text-ink lg:h-9 lg:w-9"
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-control border border-line text-muted transition-colors hover:bg-surface-2 hover:text-ink lg:h-9 lg:w-9"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </button>

@@ -3,10 +3,18 @@ import { lineCalcTotal, lineDelta, usd } from "../../studio/calc";
 
 /* Small helpers shared by the costing (step 4) and margin (step 5) screens. */
 
-export const CATEGORY_ORDER: BomCategory[] = ["wood", "labour", "manufacturing", "finishing", "hardware", "logistics", "installation"];
+/** Estimate Desk lanes, in the order they run: manufacturing decides what is made and how, procurement then prices what must be bought. */
+export type Lane = "manufacturing" | "procurement";
+export const LANE_ORDER: Lane[] = ["manufacturing", "procurement"];
+export const LANE_CATEGORIES: Record<Lane, BomCategory[]> = {
+  manufacturing: ["labour", "manufacturing", "finishing", "installation"],
+  procurement: ["material", "hardware", "logistics"],
+};
+
+export const CATEGORY_ORDER: BomCategory[] = [...LANE_CATEGORIES.manufacturing, ...LANE_CATEGORIES.procurement];
 
 export const CATEGORY_LABEL: Record<BomCategory, string> = {
-  wood: "Wood",
+  material: "Material",
   labour: "Labour",
   manufacturing: "Manufacturing",
   finishing: "Finishing",

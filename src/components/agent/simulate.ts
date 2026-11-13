@@ -14,10 +14,10 @@ const SAMPLE_INPUTS: Record<string, string> = {
   attachment_name: "wardrobe-sketch.jpg",
   attachment_kind: "sketch",
   page: "1",
-  schema: "product_type, wood_type, length_in, width_in, height_in, quantity, finish",
+  schema: "product_type, material_type, length_in, width_in, height_in, quantity, finish",
   product_type: "Wardrobe",
-  fields_json: '{"product_type":"Wardrobe","wood_type":"teak","width_in":78,"height_in":84,"depth_in":null}',
-  required_fields: "product_type, wood_type, length_in, width_in, height_in, quantity",
+  fields_json: '{"product_type":"Wardrobe","material_type":"teak","width_in":78,"height_in":84,"depth_in":null}',
+  required_fields: "product_type, material_type, length_in, width_in, height_in, quantity",
   customer_name: "Maya Patel",
   design_summary: "3-door wardrobe, teak frame with veneer panels, soft-close hinges, natural polish",
   bom_json: '[{"item":"Teak planks","qty":42,"unit":"board ft"},{"item":"Hinges","qty":6,"unit":"pcs"}]',
@@ -69,7 +69,7 @@ function hash(s: string): number {
 
 const SAMPLE_VALUES: Record<string, string | number | boolean> = {
   product_type: "Wardrobe",
-  wood_type: "teak",
+  material_type: "teak",
   length_in: 78,
   width_in: 24,
   height_in: 84,

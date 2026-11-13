@@ -1,6 +1,6 @@
 import type { KeyboardEvent } from "react";
 import MaterialSymbol from "./common/MaterialSymbol";
-import obeMark from "../assets/obe-favicon.jpeg";
+import alagMark from "../assets/alag-mark.svg";
 
 export type NavItem<T extends string> = { id: T; label: string; symbol: string };
 
@@ -13,7 +13,7 @@ type Props<T extends string> = {
   onToggleTheme: () => void;
 };
 
-/** Esti-360 icon rail: OBE mark on top, page buttons, theme switch at the bottom. */
+/** Icon rail: ALAG mark on top, page buttons, theme switch at the bottom. */
 export default function Sidebar<T extends string>({ items, active, onSelect, onHome, dark, onToggleTheme }: Props<T>) {
   // Up/Down/Home/End move between pages, as in the WAI-ARIA tabs pattern for a vertical tab list.
   const onKey = (e: KeyboardEvent, index: number) => {
@@ -28,8 +28,8 @@ export default function Sidebar<T extends string>({ items, active, onSelect, onH
   return (
     <aside className="sticky top-0 z-30 flex h-screen w-16 shrink-0 flex-col border-r border-on-brand/10 bg-brand text-on-brand">
       <div className="flex h-16 shrink-0 items-center justify-center p-1">
-        <button type="button" onClick={onHome} aria-label="Go to home, Oldcastle BuildingEnvelope" className="grid h-12 w-12 place-items-center rounded-md bg-tile ring-1 ring-on-brand/10 transition-opacity hover:opacity-95">
-          <img src={obeMark} alt="" className="h-10 w-10 select-none object-contain" draggable={false} />
+        <button type="button" onClick={onHome} aria-label="Go to home, ALAG" className="grid h-12 w-12 place-items-center rounded-chip bg-tile ring-1 ring-on-brand/10 transition-opacity hover:opacity-95">
+          <img src={alagMark} alt="" className="h-10 w-10 select-none object-contain" draggable={false} />
         </button>
       </div>
 

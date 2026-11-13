@@ -2,7 +2,7 @@ import { bomTotals, lineTotal, sellingPrice } from "../../studio/calc";
 import type { BomCategory, QuotationCase } from "../../studio/types";
 
 export const CATEGORY_LABEL: Record<BomCategory, string> = {
-  wood: "Wood and boards",
+  material: "Materials",
   labour: "Carpentry labour",
   manufacturing: "Manufacturing",
   finishing: "Finishing",
@@ -11,7 +11,7 @@ export const CATEGORY_LABEL: Record<BomCategory, string> = {
   installation: "Installation",
 };
 
-const ORDER: BomCategory[] = ["wood", "labour", "manufacturing", "finishing", "hardware", "logistics", "installation"];
+const ORDER: BomCategory[] = ["material", "labour", "manufacturing", "finishing", "hardware", "logistics", "installation"];
 
 export interface CategoryGroup {
   category: BomCategory;

@@ -57,8 +57,8 @@ export default function AddFieldForm({ existingKeys, onAdd }: { existingKeys: st
   }
 
   return (
-    <form onSubmit={submit} className="space-y-3 rounded-xl border border-line bg-surface p-3 shadow-xs" aria-label="Add a field">
-      <h4 className="text-sm font-semibold text-ink">Add a field the agent did not look for</h4>
+    <form onSubmit={submit} className="surface space-y-3 p-3" aria-label="Add a field">
+      <h4 className="t-label">Add a field the agent did not look for</h4>
       <div className="grid gap-3 @md:grid-cols-2">
         <TextInput
           label="Label"

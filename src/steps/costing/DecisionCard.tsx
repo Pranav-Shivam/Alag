@@ -13,7 +13,7 @@ const EXCEPTION_PREFIX = "Exception requested: ";
 
 function Metric({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="min-w-0 rounded-lg border border-line bg-surface-2 p-2.5">
+    <div className="min-w-0 rounded-control border border-line bg-surface-2 p-2.5">
       <div className="text-xs text-muted">{label}</div>
       <div className="break-words text-base font-semibold tabular-nums text-ink">{value}</div>
       {sub ? <div className="text-xs tabular-nums text-muted">{sub}</div> : null}
@@ -169,7 +169,7 @@ export default function DecisionCard({ qid, margin, cost, rules, rulesVersion, a
           />
         ) : null}
 
-        <div className="flex items-start gap-2 rounded-lg border border-line bg-surface-2 p-2.5 text-sm" aria-live="polite">
+        <div className="flex items-start gap-2 rounded-control border border-line bg-surface-2 p-2.5 text-sm" aria-live="polite">
           <UserCheck className="mt-0.5 h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
           <div className="min-w-0">
             <div className="text-ink">
@@ -208,7 +208,7 @@ export default function DecisionCard({ qid, margin, cost, rules, rulesVersion, a
 
       <div className="mt-4">
         <h4 className="mb-1 text-xs font-semibold text-ink">How the price is calculated</h4>
-        <pre className="whitespace-pre-wrap break-words rounded-lg border border-line bg-surface-2 p-3 font-mono text-xs leading-relaxed text-ink" aria-live="polite">
+        <pre className="whitespace-pre-wrap break-words rounded-control border border-line bg-surface-2 p-3 font-mono text-xs leading-relaxed text-ink" aria-live="polite">
           {`Selling price = cost / (1 - margin)
               = ${usd(cost)} / (1 - ${+(chosen / 100).toFixed(4)})
               = ${usd(price)}

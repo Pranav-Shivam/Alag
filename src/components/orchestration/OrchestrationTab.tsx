@@ -23,7 +23,7 @@ const RANGES = {
 } as const;
 
 const NUMBER_FIELD =
-  "min-h-10 w-full rounded-lg border bg-surface px-2.5 text-sm tabular-nums text-ink transition-colors hover:border-muted focus:border-ring";
+  "min-h-10 w-full rounded-control border bg-surface px-2.5 text-sm tabular-nums text-ink transition-colors hover:border-muted focus:border-ring";
 
 /** Whole number input that only commits values inside its range and says why otherwise. */
 function NumField({ label, value, min, max, onCommit, hideLabel }: { label: string; value: number; min: number; max: number; onCommit: (n: number) => void; hideLabel?: boolean }) {
@@ -93,7 +93,7 @@ function RoleSelect({ row, hideLabel }: { row: AgentRow; hideLabel?: boolean }) 
         value={row.orch.approverRole}
         disabled={!row.orch.requireApproval}
         onChange={(e) => update(row.step.id, { approverRole: e.target.value })}
-        className="min-h-10 w-full rounded-lg border border-line-strong bg-surface px-2.5 text-sm text-ink transition-colors hover:border-muted focus:border-ring disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted"
+        className="min-h-10 w-full rounded-control border border-line-strong bg-surface px-2.5 text-sm text-ink transition-colors hover:border-muted focus:border-ring disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-muted"
       >
         {roles.map((r) => (
           <option key={r} value={r}>
@@ -113,7 +113,7 @@ function AgentCardRow({ row }: { row: AgentRow }) {
     <Card as="article" className="space-y-3 p-4">
       <div className="flex items-start gap-2">
         <StepBadge id={step.id} />
-        <h4 className="min-w-0 flex-1 text-sm font-semibold text-ink">{name}</h4>
+        <h4 className="t-label min-w-0 flex-1">{name}</h4>
         {orch.paused ? (
           <Chip tone="danger" icon={Pause}>
             Paused
@@ -277,7 +277,7 @@ function EventBus() {
                   role="radio"
                   aria-checked={active}
                   onClick={() => setSelected(e.name)}
-                  className={`w-full rounded-xl border p-3 text-left shadow-xs transition-colors ${active ? "border-accent bg-surface ring-1 ring-accent" : "border-line bg-surface hover:border-line-strong"}`}
+                  className={`w-full rounded-surface border p-3 text-left shadow-surface transition-colors ${active ? "border-accent bg-surface ring-1 ring-accent" : "border-line bg-surface hover:border-line-strong"}`}
                 >
                   <span className="flex flex-wrap items-center justify-between gap-2">
                     <span className="font-mono text-sm font-semibold text-ink">{e.name}</span>

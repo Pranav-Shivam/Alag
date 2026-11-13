@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Calculator, Plug, Sparkles, TrendingUp, UserCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { PageHeader } from "../components/ui";
 import { STEPS } from "../data/steps";
 import type { Tech, WorkflowStep } from "../types";
 
@@ -55,7 +56,7 @@ function TechChip({ tech }: { tech: Tech }) {
 
 function StepBadge({ id }: { id: number }) {
   return (
-    <span className="inline-grid h-7 min-w-7 shrink-0 place-items-center rounded-lg border border-warn-line bg-warn-soft px-1.5 text-xs font-semibold tabular-nums text-warn-fg">
+    <span className="inline-grid h-7 min-w-7 shrink-0 place-items-center rounded-control border border-warn-line bg-warn-soft px-1.5 text-xs font-semibold tabular-nums text-warn-fg">
       {id}
     </span>
   );
@@ -63,11 +64,11 @@ function StepBadge({ id }: { id: number }) {
 
 function StepCard({ step }: { step: WorkflowStep }) {
   return (
-    <li className="rounded-xl border border-line bg-surface p-4 shadow-xs">
+    <li className="surface p-4">
       <div className="flex items-start gap-3">
         <StepBadge id={step.id} />
         <div className="min-w-0">
-          <h3 className="text-base font-semibold leading-snug text-ink">{step.name}</h3>
+          <h3 className="t-section">{step.name}</h3>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {step.tech.map((t) => (
               <TechChip key={t} tech={t} />
@@ -76,7 +77,7 @@ function StepCard({ step }: { step: WorkflowStep }) {
         </div>
       </div>
       <p className="mt-3 text-sm leading-relaxed text-ink-2">{step.description}</p>
-      <dl className="mt-3 space-y-1.5 rounded-lg bg-surface-2 p-3 text-sm">
+      <dl className="mt-3 space-y-1.5 rounded-control bg-surface-2 p-3 text-sm">
         <div className="flex gap-2">
           <dt className="w-14 shrink-0 text-muted">Agent</dt>
           <dd className="text-ink-2">{step.agent}</dd>
@@ -100,19 +101,14 @@ export default function StepsPage() {
   const visible = filter === "All" ? STEPS : STEPS.filter((s) => s.tech.includes(filter));
 
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight text-ink">The 14 steps</h1>
-        <p className="mt-1 text-sm text-muted">
-          Use AI to understand. Use ML to predict. Use rules to calculate. Use humans to approve.
-        </p>
-      </header>
+    <div className="page">
+      <PageHeader title="The 14 steps" description="Use AI to understand. Use ML to predict. Use rules to calculate. Use humans to approve." />
 
       <section
         aria-label="Technology legend"
-        className="rounded-xl border border-line bg-surface p-4 shadow-xs"
+        className="surface p-4"
       >
-        <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Technology legend</h2>
+        <h2 className="t-eyebrow">Technology legend</h2>
         <ul className="mt-3 grid gap-x-6 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {LEGEND.map((l) => (
             <li key={l.tech} className="flex items-center gap-3 text-sm text-ink-2">
@@ -158,7 +154,7 @@ export default function StepsPage() {
       </div>
 
       {/* Laptop: table */}
-      <div className="hidden overflow-hidden rounded-xl border border-line bg-surface shadow-xs md:block">
+      <div className="surface hidden overflow-hidden md:block">
         <table className="w-full table-fixed text-left text-sm">
           <thead className="table-head bg-surface-2">
             <tr className="border-b border-line">

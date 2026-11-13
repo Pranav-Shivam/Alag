@@ -1,0 +1,258 @@
+/*
+ * ALAG theme tokens. The ONLY place colors, radii, elevation and chart colors are defined.
+ * Components use the semantic names (bg-surface, text-ink, rounded-control, shadow-surface, text-chart-1 ...)
+ * and never hardcode a color. Dark mode is the `.dark` class on <html> (src/lib/theme.ts).
+ */
+
+/* Dark mode is driven by a `.dark` class on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: Satoshi, ui-sans-serif, system-ui, sans-serif;
+  --font-heading: Lato, ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-shell: var(--shell);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-on-accent: var(--on-accent);
+  --color-ring: var(--ring);
+
+  --color-brand: var(--brand);
+  --color-on-brand: var(--on-brand);
+  --color-mint: var(--mint);
+  --color-mint-hover: var(--mint-hover);
+  --color-mint-fg: var(--mint-fg);
+  --color-tile: var(--tile);
+  --color-on-tile: var(--on-tile);
+  --color-loader-accent: var(--loader-accent);
+  --color-loader-accent-deep: var(--loader-accent-deep);
+  --color-overlay: var(--overlay);
+
+  --color-ok-soft: var(--ok-soft);
+  --color-ok-fg: var(--ok-fg);
+  --color-ok-line: var(--ok-line);
+  --color-ok-solid: var(--ok-solid);
+
+  --color-warn-soft: var(--warn-soft);
+  --color-warn-fg: var(--warn-fg);
+  --color-warn-line: var(--warn-line);
+  --color-warn-solid: var(--warn-solid);
+
+  --color-alert-soft: var(--alert-soft);
+  --color-alert-fg: var(--alert-fg);
+  --color-alert-line: var(--alert-line);
+  --color-alert-solid: var(--alert-solid);
+
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-fg: var(--danger-fg);
+  --color-danger-line: var(--danger-line);
+  --color-danger-solid: var(--danger-solid);
+
+  --color-info-soft: var(--info-soft);
+  --color-info-fg: var(--info-fg);
+  --color-info-line: var(--info-line);
+  --color-info-solid: var(--info-solid);
+
+  --color-violet-soft: var(--violet-soft);
+  --color-violet-fg: var(--violet-fg);
+  --color-violet-line: var(--violet-line);
+  --color-violet-solid: var(--violet-solid);
+
+  --color-teal-soft: var(--teal-soft);
+  --color-teal-fg: var(--teal-fg);
+  --color-teal-line: var(--teal-line);
+  --color-teal-solid: var(--teal-solid);
+
+  /* Smallest text size, for dense badges and captions. Everything else uses the Tailwind scale. */
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+
+  /* Shape: three radii only. Pills and circles use rounded-full. */
+  --radius-chip: var(--r-chip);
+  --radius-control: var(--r-control);
+  --radius-surface: var(--r-surface);
+
+  /* Elevation: surface = resting cards, raised = menus, drawers, toasts. */
+  --shadow-surface: var(--elev-surface);
+  --shadow-raised: var(--elev-raised);
+
+  /* Data-viz palette, same order everywhere. */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+:root {
+  color-scheme: light;
+
+  /* ALAG palette (light): indigo brand, amber call-to-action. */
+  --canvas: #f6f7fb;
+  --surface: #ffffff;
+  --surface-2: #f6f7fb;
+  --shell: #eef0f7; /* app shell behind header and footer */
+  --line: #e3e6f0;
+  --line-strong: #cdd2e3;
+  --ink: #0b1020;
+  --ink-2: #343b52;
+  --muted: #596079; /* 4.5:1 or better on canvas */
+  --accent: #3730a3; /* primary: indigo */
+  --accent-hover: #2e2784;
+  --accent-fg: #3730a3;
+  --on-accent: #ffffff;
+  --ring: #4f46e5;
+
+  /* Sidebar. Same deep indigo in both themes. */
+  --brand: #1e1b4b;
+  --on-brand: #ffffff;
+
+  /* Primary call-to-action (token name `mint` is historical): amber fill, dark text. */
+  --mint: #fbbf24;
+  --mint-hover: #f5ae0b;
+  --mint-fg: #1c1303;
+
+  /* Brand loader and logo tile. The tile is white in both themes. */
+  --tile: #ffffff;
+  --on-tile: #0b1020; /* ink on the always-white tile */
+  --loader-accent: #fbbf24;
+  --loader-accent-deep: #d97706;
+  --overlay: rgb(0 0 0 / 0.45); /* modal mask */
+
+  /* Status colors: ok = Completed, warn = Review, danger = Rejected, info = Open, violet = Assigned. */
+  --ok-soft: #e2f7ec;
+  --ok-fg: #187d3f;
+  --ok-line: #acdec0;
+  --ok-solid: #047857;
+
+  --warn-soft: #fff4dd;
+  --warn-fg: #8a5500;
+  --warn-line: #f5d8a3;
+  --warn-solid: #b45309;
+
+  --alert-soft: #fff7ed;
+  --alert-fg: #9a3412;
+  --alert-line: #fdba74;
+  --alert-solid: #c2410c;
+
+  --danger-soft: #fce6e9;
+  --danger-fg: #b12535;
+  --danger-line: #f4bbc2;
+  --danger-solid: #b91c1c;
+
+  --info-soft: #e8f1ff;
+  --info-fg: #114a93;
+  --info-line: #bad5f7;
+  --info-solid: #1d4ed8;
+
+  --violet-soft: #efeaff;
+  --violet-fg: #6a43ab;
+  --violet-line: #d3c1f8;
+  --violet-solid: #6d28d9;
+
+  --teal-soft: #f0fdfa;
+  --teal-fg: #115e59;
+  --teal-line: #5eead4;
+  --teal-solid: #0f766e;
+
+  /* Shape and elevation (values behind the radius-* and shadow-* theme names). */
+  --r-chip: 0.375rem; /* tags, small badges, tiny bars */
+  --r-control: 0.5rem; /* buttons, inputs, callouts, nav buttons */
+  --r-surface: 0.75rem; /* cards, panels, drawers */
+  --elev-surface: 0 1px 2px 0 rgb(15 17 40 / 0.06);
+  --elev-raised: 0 8px 24px -6px rgb(15 17 40 / 0.22);
+
+  /* Layout */
+  --page-max: 90rem;
+
+  /* Data-viz palette (light). */
+  --chart-1: #4f46e5;
+  --chart-2: #d97706;
+  --chart-3: #0f766e;
+  --chart-4: #7c3aed;
+  --chart-5: #be123c;
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* ALAG palette (dark). */
+  --canvas: #181a2e;
+  --surface: #0f1120;
+  --surface-2: #181a2e;
+  --shell: #0f1120;
+  --line: #2b2e48;
+  --line-strong: #3d4160;
+  --ink: #ffffff;
+  --ink-2: #d4d7e6;
+  --muted: #9aa0bd;
+  --accent: #a5b4fc; /* high contrast on the dark surface */
+  --accent-hover: #c7d2fe;
+  --accent-fg: #a5b4fc;
+  --on-accent: #0f1120;
+  --ring: #fbbf24;
+
+  --brand: #1a1747;
+  --on-brand: #ffffff;
+
+  --mint: #5c3d00;
+  --mint-hover: #704a00;
+  --mint-fg: #ffd36b;
+
+  --tile: #ffffff;
+  --on-tile: #0b1020;
+  --loader-accent: #fbbf24;
+  --loader-accent-deep: #d97706;
+  --overlay: rgb(0 0 0 / 0.45);
+
+  --ok-soft: #143e2b;
+  --ok-fg: #99ecbe;
+  --ok-line: #276747;
+  --ok-solid: #059669;
+
+  --warn-soft: #4f3918;
+  --warn-fg: #ffdda0;
+  --warn-line: #7a5928;
+  --warn-solid: #d97706;
+
+  --alert-soft: rgb(249 115 22 / 0.14);
+  --alert-fg: #fdba74;
+  --alert-line: rgb(249 115 22 / 0.4);
+  --alert-solid: #ea580c;
+
+  --danger-soft: #521e27;
+  --danger-fg: #ffb6bf;
+  --danger-line: #80313e;
+  --danger-solid: #dc2626;
+
+  --info-soft: #1a314e;
+  --info-fg: #a7cfff;
+  --info-line: #2f5685;
+  --info-solid: #2563eb;
+
+  --violet-soft: #312549;
+  --violet-fg: #d6bcff;
+  --violet-line: #58437f;
+  --violet-solid: #7c3aed;
+
+  --teal-soft: rgb(20 184 166 / 0.14);
+  --teal-fg: #5eead4;
+  --teal-line: rgb(20 184 166 / 0.4);
+  --teal-solid: #0d9488;
+
+  /* Data-viz palette (dark). */
+  --chart-1: #a5b4fc;
+  --chart-2: #fbbf24;
+  --chart-3: #5eead4;
+  --chart-4: #c4b5fd;
+  --chart-5: #fda4af;
+}

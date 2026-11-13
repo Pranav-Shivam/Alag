@@ -51,7 +51,7 @@ export default function ActivityTab({ quotationId, stepId }: Props) {
       </div>
 
       {events.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-line-strong bg-surface-2 p-6 text-center">
+        <div className="rounded-surface border border-dashed border-line-strong bg-surface-2 p-6 text-center">
           <span className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-surface text-muted ring-1 ring-line">
             <History className="h-5 w-5" aria-hidden="true" />
           </span>

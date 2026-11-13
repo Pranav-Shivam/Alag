@@ -42,7 +42,7 @@ export default function RegionSection({ rules, set }: Props) {
 
       <ul className="space-y-2">
         {rows.map((r) => (
-          <li key={r.region} className={`${GRID} rounded-lg border border-line p-3 @md:border-0 @md:p-0`}>
+          <li key={r.region} className={`${GRID} rounded-control border border-line p-3 @md:border-0 @md:p-0`}>
             <div className="col-span-3 flex min-h-10 items-center text-sm font-medium text-ink @md:col-span-1">{r.region}</div>
             <NumInput label="Labour percent" labelClass={CELL_LABEL} value={r.labourPct} min={-50} max={100} suffix="%" onChange={(n) => patch(r.region, { labourPct: n })} />
             <NumInput label="Material percent" labelClass={CELL_LABEL} value={r.materialPct} min={-50} max={100} suffix="%" onChange={(n) => patch(r.region, { materialPct: n })} />

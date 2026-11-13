@@ -48,7 +48,7 @@ export function StructuredOutput({ output, label }: { output: string; label: str
   const data = parse(output);
   if (!data) {
     return (
-      <pre tabIndex={0} aria-label={label} className="max-h-80 overflow-auto whitespace-pre-wrap break-words rounded-lg border border-line bg-surface-2 p-3 text-sm leading-relaxed text-ink">
+      <pre tabIndex={0} aria-label={label} className="max-h-80 overflow-auto whitespace-pre-wrap break-words rounded-control border border-line bg-surface-2 p-3 text-sm leading-relaxed text-ink">
         {output}
       </pre>
     );
@@ -74,7 +74,7 @@ export function StructuredOutput({ output, label }: { output: string; label: str
       ) : null}
 
       {rows.length > 0 ? (
-        <div className="overflow-x-auto rounded-lg border border-line">
+        <div className="overflow-x-auto rounded-control border border-line">
           <table className="w-full text-left text-sm">
             <thead className="table-head border-b border-line bg-surface-2">
               <tr>
@@ -102,7 +102,7 @@ export function StructuredOutput({ output, label }: { output: string; label: str
         </div>
       ) : null}
 
-      <details className="rounded-lg border border-line bg-surface-2">
+      <details className="rounded-control border border-line bg-surface-2">
         <summary className="min-h-9 cursor-pointer select-none px-3 py-2 text-xs font-medium text-ink-2">Raw JSON</summary>
         <pre tabIndex={0} className="max-h-64 overflow-auto border-t border-line p-3 font-mono text-xs leading-relaxed text-ink">{output}</pre>
       </details>
@@ -118,7 +118,7 @@ export function HighlightedText({ text }: { text: string }) {
     <>
       {text.split(TOKEN).map((part, i) =>
         i % 2 === 1 ? (
-          <mark key={i} className="rounded border border-warn-line bg-warn-soft px-1 font-mono text-xs text-warn-fg" title="This variable has no value">
+          <mark key={i} className="rounded-chip border border-warn-line bg-warn-soft px-1 font-mono text-xs text-warn-fg" title="This variable has no value">
             {part.replace(/[{}\s]/g, "")}
           </mark>
         ) : (
@@ -140,7 +140,7 @@ export function PromptView({ prompt, tokens }: { prompt: string; tokens: number 
   const unfilled = new Set([...prompt.matchAll(TOKEN)].map((m) => m[0])).size;
 
   return (
-    <details className="rounded-lg border border-line bg-surface-2">
+    <details className="rounded-control border border-line bg-surface-2">
       <summary className="flex min-h-9 cursor-pointer select-none flex-wrap items-center gap-2 px-3 py-2 text-xs font-medium text-ink-2">
         Rendered prompt, about {tokens} tokens
         {unfilled > 0 ? <Chip tone="warn">{unfilled} unfilled {unfilled === 1 ? "variable" : "variables"}</Chip> : null}

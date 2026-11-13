@@ -27,8 +27,8 @@ function valueText(f: ExtractedField): string {
 }
 
 const EXAMPLE: Record<string, string> = {
-  product_type: "for example wardrobe, bed or kitchen cabinet",
-  wood_type: "for example Teak, Cedar or Oak",
+  product_type: "for example wardrobe, machine guard or kitchen cabinet",
+  material_type: "for example the main material named in the RFQ",
   length_in: "for example 84 inches or 7 ft",
   width_in: "for example 24 inches or 2 ft",
   height_in: "for example 90 inches or 7 ft 6 in",
@@ -166,7 +166,7 @@ export default function Step3Approval({ quotation }: CaseProps) {
           </Callout>
         ) : (
           <>
-            <ul className="mt-3 divide-y divide-line rounded-lg border border-line">
+            <ul className="mt-3 divide-y divide-line rounded-control border border-line">
               {checklist.map(({ f, r }) => {
                 const ui = READINESS_UI[r];
                 return (
@@ -183,7 +183,7 @@ export default function Step3Approval({ quotation }: CaseProps) {
               })}
             </ul>
 
-            <div className={`mt-3 rounded-lg border p-3 ${allReady ? "border-ok-line bg-ok-soft" : "border-warn-line bg-warn-soft"}`}>
+            <div className={`mt-3 rounded-control border p-3 ${allReady ? "border-ok-line bg-ok-soft" : "border-warn-line bg-warn-soft"}`}>
               <div className="flex flex-wrap items-center gap-2">
                 <Sparkles className={`h-4 w-4 ${allReady ? "text-ok-fg" : "text-warn-fg"}`} aria-hidden="true" />
                 <span className={`text-sm font-semibold ${allReady ? "text-ok-fg" : "text-warn-fg"}`}>
@@ -229,7 +229,7 @@ export default function Step3Approval({ quotation }: CaseProps) {
         />
 
         {!shown ? (
-          <div className="mt-3 rounded-lg border border-dashed border-line-strong bg-surface-2 p-4">
+          <div className="mt-3 rounded-control border border-dashed border-line-strong bg-surface-2 p-4">
             <p className="text-sm text-ink-2">No email drafted yet. The AI can write a short polite one that asks only for what is missing or unclear.</p>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <Button variant="primary" icon={Sparkles} onClick={draftWithAi} disabled={drafting || !extractionOk || asks.length === 0}>
@@ -324,7 +324,7 @@ export default function Step3Approval({ quotation }: CaseProps) {
               </p>
             ) : null}
             {openItems && !allReady && extractionOk ? (
-              <div className="space-y-2 rounded-lg border border-warn-line bg-warn-soft p-3">
+              <div className="space-y-2 rounded-control border border-warn-line bg-warn-soft p-3">
                 <TextArea
                   label="Why approve with open items?"
                   rows={3}

@@ -6,14 +6,14 @@ export const ORDER_STEP = 7; // awarded quotation becomes an order here
 export const STEPS: WorkflowStep[] = [
   {
     id: 1,
-    name: "RFQ ingestion",
-    short: "RFQ in",
-    agent: "RFQ Agent",
-    owner: "Estimator",
+    name: "Lead & RFQ intake",
+    short: "Lead in",
+    agent: "Intake Agent",
+    owner: "Sales / Estimator",
     tech: ["AI", "Integration"],
     description:
-      "Outlook mailbox is read through Microsoft Graph. Email and attachments are stored, a unique RFQ ID is made, duplicates are checked.",
-    output: "Central RFQ record with original email and attachments",
+      "Leads arrive from the shared mailbox, web form or portal. Message and attachments are stored, a unique RFQ ID is made, duplicates are checked and the lead source is recorded.",
+    output: "Central lead and RFQ record with original message and attachments",
   },
   {
     id: 2,
@@ -23,30 +23,30 @@ export const STEPS: WorkflowStep[] = [
     owner: "Estimator",
     tech: ["AI", "Rules"],
     description:
-      "OCR and vision models read sketches, PDFs and drawings. Dimensions, wood type and finish are extracted into a fixed JSON. Low confidence fields are flagged.",
+      "OCR and vision models read sketches, PDFs and drawings. Dimensions, material and finish are extracted into a fixed JSON. Low confidence fields are flagged.",
     output: "Structured RFQ with confidence scores",
   },
   {
     id: 3,
-    name: "QuoteSmart",
-    short: "QuoteSmart",
+    name: "Lead Smart",
+    short: "Lead Smart",
     agent: "Requirement Validation Agent",
     owner: "Estimator / Sales",
     tech: ["AI", "Human"],
     description:
-      "Estimator checks extracted values. AI lists missing information and drafts a clarification email. A human approves the RFQ for estimation.",
-    output: "RFQ approved for estimation",
+      "Qualifies the lead and checks the extracted values. AI lists missing information and drafts a clarification email. A human approves the RFQ for estimation.",
+    output: "Qualified RFQ approved for estimation",
   },
   {
     id: 4,
-    name: "ESTI-360",
-    short: "ESTI-360",
+    name: "Estimate Desk",
+    short: "Estimate",
     agent: "Estimation Assistant Agent",
-    owner: "Design / Estimator",
+    owner: "Manufacturing, then Procurement",
     tech: ["AI", "Rules", "Human"],
     description:
-      "Technical design and Bill of Materials are prepared. The price book engine does the math. AI only suggests and explains, it never invents a price.",
-    output: "Auditable cost estimate",
+      "Two lanes, in order. Manufacturing first: design, routing, labour and machine hours, finishing and installation. Then Procurement: materials, bought-in parts, outside services and freight, with supplier quotes where the price book has no price. The price book engine does the math. AI only suggests and explains, it never invents a price.",
+    output: "Auditable cost estimate, confirmed by both lanes",
   },
   {
     id: 5,
@@ -111,7 +111,7 @@ export const STEPS: WorkflowStep[] = [
     owner: "Manufacturing / Quality",
     tech: ["AI", "ML", "Human"],
     description:
-      "Work order is created and scheduled. Cutting, shaping, assembly, polishing and quality inspection are tracked. Rework is recorded.",
+      "Work order is created and scheduled. Cutting, forming, assembly, finishing and quality inspection are tracked. Rework is recorded.",
     output: "Quality approved product",
   },
   {

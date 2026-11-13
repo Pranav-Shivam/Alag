@@ -20,7 +20,7 @@ function AgentCard({ row, onOpen }: { row: AgentRow; onOpen: (stepId: number) =>
       type="button"
       onClick={() => onOpen(step.id)}
       aria-label={`Step ${step.id}, ${step.agent}. Open summary`}
-      className="flex w-full flex-col gap-2 rounded-lg border border-line bg-surface p-3 text-left shadow-xs transition-colors hover:border-line-strong hover:bg-surface-2"
+      className="flex w-full flex-col gap-2 rounded-control border border-line bg-surface p-3 text-left shadow-surface transition-colors hover:border-line-strong hover:bg-surface-2"
     >
       <span className="flex items-start gap-2">
         <StepBadge id={step.id} />
@@ -80,7 +80,7 @@ function AgentCard({ row, onOpen }: { row: AgentRow; onOpen: (stepId: number) =>
 function Group({ group, rows, onOpen }: { group: AgentGroup; rows: AgentRow[]; onOpen: (stepId: number) => void }) {
   const live = rows.filter((r) => !r.orch.paused).length;
   return (
-    <section aria-labelledby={`group-${group.id}`} className="min-w-0 rounded-xl border border-line bg-surface-2 p-3">
+    <section aria-labelledby={`group-${group.id}`} className="min-w-0 rounded-surface border border-line bg-surface-2 p-3">
       <header className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div className="min-w-0">
           <h4 id={`group-${group.id}`} className="text-sm font-semibold text-ink">
@@ -111,10 +111,10 @@ function Group({ group, rows, onOpen }: { group: AgentGroup; rows: AgentRow[]; o
 export default function OrchestratorDiagram({ rows, onOpen }: { rows: AgentRow[]; onOpen: (stepId: number) => void }) {
   return (
     <Card className="p-4">
-      <div className="mx-auto max-w-3xl rounded-xl border border-accent bg-surface p-4 text-center shadow-xs">
+      <div className="mx-auto max-w-3xl rounded-surface border border-accent bg-surface p-4 text-center shadow-surface">
         <div className="flex items-center justify-center gap-2">
           <Layers className="h-4 w-4 text-accent-fg" aria-hidden="true" />
-          <h3 className="text-sm font-semibold text-ink">Workflow orchestrator</h3>
+          <h3 className="t-label">Workflow orchestrator</h3>
         </div>
         <p className="mx-auto mt-1 max-w-xl text-xs text-muted">
           Passes work from one domain agent to the next. Agents never call each other directly, they publish events and the orchestrator routes them.

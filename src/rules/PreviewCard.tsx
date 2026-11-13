@@ -91,7 +91,7 @@ const signed = (n: number) => `${n > 0 ? "+" : ""}${n}%`;
 
 function Result({ label, value, note, strong }: { label: string; value: string; note?: string; strong?: boolean }) {
   return (
-    <div className="rounded-lg border border-line bg-surface-2 p-2.5">
+    <div className="rounded-control border border-line bg-surface-2 p-2.5">
       <dt className="text-xs text-muted">{label}</dt>
       <dd className={`mt-0.5 tabular-nums text-ink ${strong ? "text-base font-semibold" : "text-sm font-medium"}`}>{value}</dd>
       {note ? <dd className="mt-0.5 text-xs text-muted">{note}</dd> : null}

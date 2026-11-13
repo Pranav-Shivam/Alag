@@ -1,0 +1,102 @@
+/* Base element styles, the type scale and shared layout utilities. Tokens live in tokens.css. */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  /* The root size is set from the viewport (src/lib/rootFontSize.ts); this is the fallback. */
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* One consistent keyboard focus ring for every interactive element. */
+:where(a, button, select, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/*
+ * Type scale. One set of text styles for every screen. Use these instead of ad hoc text-* + font-* combinations.
+ *   t-page     the section name in the app header (the page's one <h1>)
+ *   t-title    the title under the header on a page (<h2>)
+ *   t-section  a card or panel title
+ *   t-label    a sub-heading or group label inside a card
+ *   t-eyebrow  small uppercase caption above a value
+ * Body copy is text-sm, secondary copy is text-sm text-muted, captions are text-xs text-muted.
+ */
+@utility t-page {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  @media (min-width: 1024px) {
+    font-size: 1.75rem;
+  }
+}
+@utility t-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+@utility t-section {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+@utility t-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+@utility t-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Surfaces and layout. */
+@utility surface {
+  border: 1px solid var(--line);
+  border-radius: var(--r-surface);
+  background-color: var(--surface);
+  box-shadow: var(--elev-surface);
+}
+/* Page wrapper: same width, alignment and vertical rhythm on every screen. */
+@utility page {
+  width: 100%;
+  min-width: 0;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  & > * + * {
+    margin-top: 1.5rem;
+  }
+}

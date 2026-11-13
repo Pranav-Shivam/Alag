@@ -7,10 +7,10 @@ import { Button, Callout, Card, SimulatedTag, TextArea } from "../../components/
 export function NotRunState({ running, fileCount, onRun }: { running: boolean; fileCount: number; onRun: () => void }) {
   return (
     <Card className="p-5 text-center">
-      <span className="mx-auto grid h-11 w-11 place-items-center rounded-xl border border-line bg-surface-2 text-muted">
+      <span className="mx-auto grid h-11 w-11 place-items-center rounded-surface border border-line bg-surface-2 text-muted">
         <FileSearch className="h-5 w-5" aria-hidden="true" />
       </span>
-      <h3 className="mt-3 text-sm font-semibold text-ink">Extraction has not run yet</h3>
+      <h3 className="t-label mt-3">Extraction has not run yet</h3>
       <p className="mx-auto mt-1 max-w-sm text-sm text-muted">
         The agent has not read the attachments for this quotation, so there are no fields to review. Run the extraction to get a first reading, then check what it found.
       </p>
@@ -56,9 +56,9 @@ export function FailedState({ reason, prompt, running, fileCount, hasDraft, draf
         <CardHead n={1} icon={RotateCcw} title="Re-run with different instructions" />
         <div className="mt-2 space-y-2">
           <TextArea label="Instruction for this run" rows={3} value={instruction} onChange={(e) => setInstruction(e.target.value)} hint="This instruction applies to this run only and does not change the agent." />
-          <details className="rounded-lg border border-line bg-surface-2 p-2">
+          <details className="rounded-control border border-line bg-surface-2 p-2">
             <summary className="cursor-pointer text-xs font-medium text-ink-2">View the live extraction prompt (read only)</summary>
-            <p className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-md bg-surface p-2 text-sm leading-relaxed text-ink-2">{prompt?.trim() ? <HighlightedText text={prompt} /> : "The agent has no extraction prompt set."}</p>
+            <p className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-chip bg-surface p-2 text-sm leading-relaxed text-ink-2">{prompt?.trim() ? <HighlightedText text={prompt} /> : "The agent has no extraction prompt set."}</p>
             <p className="mt-1.5 text-xs text-muted">
               To change the prompt for every quotation,{" "}
               <button type="button" onClick={onEditAgent} className="font-medium text-accent-fg underline underline-offset-2 hover:text-accent-hover">
@@ -111,7 +111,7 @@ function CardHead({ n, icon: Icon, title }: { n: number; icon: typeof RotateCcw;
         {n}
       </span>
       <Icon className="h-4 w-4 text-muted" aria-hidden="true" />
-      <h3 className="text-sm font-semibold text-ink">{title}</h3>
+      <h3 className="t-label">{title}</h3>
     </div>
   );
 }
