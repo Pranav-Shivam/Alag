@@ -1,8 +1,11 @@
 name: Deploy
 on:
   push:
-    branches: [main, aleg-generic]
+    branches: [main, OBE]
   workflow_dispatch:
+concurrency:
+  group: pages
+  cancel-in-progress: true
 permissions:
   contents: read
   pages: write
