@@ -45,7 +45,7 @@ function toAttachment(l: LibraryItem, origin: Attachment["origin"], at: string):
     name: l.file,
     title: l.title,
     kind: l.kind,
-    url: `/samples/${l.file}`,
+    url: `${import.meta.env.BASE_URL}samples/${l.file}`,
     mime: l.mime,
     sizeBytes: l.sizeBytes,
     pages: l.pages,

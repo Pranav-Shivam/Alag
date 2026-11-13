@@ -127,7 +127,7 @@ export default function AddAttachments({ attachments, onAdd, onMessage }: Props)
               const attached = attachedIds.has(`att-${l.id}`);
               return (
                 <li key={l.id} className="flex min-w-0 items-start gap-3 rounded-lg border border-line p-2.5">
-                  <AttachmentThumb item={{ mime: l.mime, url: `/samples/${l.file}`, title: l.title, pages: l.pages }} className="h-14 w-14" />
+                  <AttachmentThumb item={{ mime: l.mime, url: `${import.meta.env.BASE_URL}samples/${l.file}`, title: l.title, pages: l.pages }} className="h-14 w-14" />
                   <div className="min-w-0 flex-1">
                     <div className="break-words text-sm font-medium text-ink">{l.title}</div>
                     <div className="mt-1 flex flex-wrap items-center gap-1.5">

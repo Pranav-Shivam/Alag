@@ -28,8 +28,8 @@ export const STEPS: WorkflowStep[] = [
   },
   {
     id: 3,
-    name: "RFQ review & approval",
-    short: "RFQ review",
+    name: "QuoteSmart",
+    short: "QuoteSmart",
     agent: "Requirement Validation Agent",
     owner: "Estimator / Sales",
     tech: ["AI", "Human"],
@@ -39,8 +39,8 @@ export const STEPS: WorkflowStep[] = [
   },
   {
     id: 4,
-    name: "Design, BOM & costing",
-    short: "Costing",
+    name: "ESTI-360",
+    short: "ESTI-360",
     agent: "Estimation Assistant Agent",
     owner: "Design / Estimator",
     tech: ["AI", "Rules", "Human"],
