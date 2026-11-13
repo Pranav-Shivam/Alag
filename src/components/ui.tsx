@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 import { useId } from "react";
 import { Info } from "lucide-react";
+import AppLoader from "./common/AppLoader";
 
 /* Shared building blocks so every editor in the inspector looks the same. Colors are semantic tokens only. */
 
@@ -53,7 +54,7 @@ export function Chip({ tone = "neutral", icon: Icon, children, className = "" }:
 
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 const VARIANT: Record<Variant, string> = {
-  primary: "bg-accent text-on-accent hover:bg-accent-hover border-transparent shadow-xs",
+  primary: "bg-mint text-mint-fg hover:bg-mint-hover border-transparent shadow-xs",
   secondary: "bg-surface text-ink border-line-strong hover:bg-surface-2",
   ghost: "bg-transparent text-ink-2 border-transparent hover:bg-surface-2",
   danger: "bg-danger-soft text-danger-fg border-danger-line hover:brightness-95",
@@ -63,19 +64,21 @@ export function Button({
   variant = "secondary",
   size = "md",
   icon: Icon,
+  loading = false,
   children,
   className = "",
   ...rest
-}: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant; size?: "sm" | "md"; icon?: IconType }) {
+}: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant; size?: "sm" | "md"; icon?: IconType; loading?: boolean }) {
   return (
     <button
       type="button"
+      aria-busy={loading || undefined}
       {...rest}
       className={`inline-flex items-center justify-center gap-1.5 rounded-lg border font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
         size === "sm" ? "min-h-8 px-2.5 text-xs" : "min-h-10 px-3.5 text-sm"
       } ${VARIANT[variant]} ${className}`}
     >
-      {Icon ? <Icon className={size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4"} aria-hidden="true" /> : null}
+      {loading ? <AppLoader variant="icon" size="xs" onMint={variant === "primary"} /> : Icon ? <Icon className={size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4"} aria-hidden="true" /> : null}
       {children}
     </button>
   );

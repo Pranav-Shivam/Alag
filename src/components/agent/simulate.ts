@@ -1,6 +1,6 @@
 import { estimateTokens, fillTemplate } from "../../studio/calc";
 import type { AgentBody, SchemaField } from "../../studio/types";
-import { humanize } from "./logic";
+import { fieldLabel, humanize } from "./logic";
 
 /* Everything here is SIMULATED. No network call is made. Output is deterministic for the same inputs. */
 
@@ -168,7 +168,7 @@ export function simulate(body: AgentBody, values: Record<string, string>): SimRe
 
   const noInvent = has(/invent|assume|guess|never.*(price|value)/);
   if (blank.length > 0 && !noInvent) {
-    checks.push({ label: "Did not invent a missing value", pass: false, detail: `Input ${blank.join(", ")} was empty and no guardrail stops the agent from filling it in.` });
+    checks.push({ label: "Did not invent a missing value", pass: false, detail: `Input ${blank.map(humanize).join(", ").toLowerCase()} was empty and no guardrail stops the agent from filling it in.` });
   } else {
     checks.push({ label: "Did not invent a missing value", pass: true, detail: nullCount > 0 ? `${nullCount} missing ${nullCount === 1 ? "field was" : "fields were"} left as null.` : "Every value came from the input." });
   }
@@ -176,7 +176,7 @@ export function simulate(body: AgentBody, values: Record<string, string>): SimRe
   checks.push({
     label: "Sent low-confidence fields to a human",
     pass: true,
-    detail: needsHuman.length ? `${needsHuman.length} below the threshold: ${needsHuman.join(", ")}.` : "No field fell below its threshold.",
+    detail: needsHuman.length ? `${needsHuman.length} below the threshold: ${needsHuman.map(fieldLabel).join(", ")}.` : "No field fell below its threshold.",
   });
 
   const risky = body.tools.filter((t) => t.enabled && /send|create|purchase|payment|refund/i.test(t.name));

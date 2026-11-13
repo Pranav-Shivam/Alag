@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { CircleCheck, Loader2, Send, Sparkles } from "lucide-react";
+import { CircleCheck, Send, Sparkles } from "lucide-react";
+import { toast } from "sonner";
 import { Button, Callout, Card, Chip, SectionTitle, SimulatedTag, TextArea, TextInput } from "../../components/ui";
 import { usd } from "../../studio/calc";
 import { useStudio } from "../../studio/store";
@@ -44,6 +45,7 @@ export default function CoverEmail({ quotation, draft, total }: Props) {
       setDraft(quotation.id, { body: writeBody(quotation, draft, total) });
       log(quotation.id, { stepId: 6, actor: "AI", who: "Quotation Agent", text: "Drafted the cover email for review (simulated)" });
       setBusy(false);
+      toast.success("Cover email drafted", { description: "Read it and edit before you send." });
     }, 700);
   };
 
@@ -51,6 +53,7 @@ export default function CoverEmail({ quotation, draft, total }: Props) {
     setDraft(quotation.id, { status: "sent" });
     log(quotation.id, { stepId: 6, actor: "Human", who: "You", text: `Sent quotation ${quotation.id} to ${quotation.customer}` });
     setConfirming(false);
+    toast.success("Quotation sent", { description: `${quotation.id} went to ${quotation.customer}.` });
   };
 
   return (
@@ -73,7 +76,7 @@ export default function CoverEmail({ quotation, draft, total }: Props) {
       {!sent ? (
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <Button icon={busy ? Loader2 : Sparkles} disabled={busy || total === null} onClick={aiDraft} aria-busy={busy}>
+            <Button icon={Sparkles} loading={busy} disabled={busy || total === null} onClick={aiDraft}>
               {busy ? "Drafting" : "Draft with AI"}
             </Button>
             <SimulatedTag />

@@ -160,7 +160,7 @@ export default function StepsPage() {
       {/* Laptop: table */}
       <div className="hidden overflow-hidden rounded-xl border border-line bg-surface shadow-xs md:block">
         <table className="w-full table-fixed text-left text-sm">
-          <thead className="bg-surface-2 text-xs uppercase tracking-wide text-muted">
+          <thead className="table-head bg-surface-2">
             <tr className="border-b border-line">
               <th scope="col" className="w-12 px-4 py-3 font-semibold">#</th>
               <th scope="col" className="w-[13%] px-3 py-3 font-semibold">Step</th>

@@ -5,7 +5,6 @@ import {
   Cpu,
   Database,
   FileOutput,
-  LoaderCircle,
   LogIn,
   OctagonX,
   RotateCw,
@@ -368,8 +367,7 @@ function Rejudge({ item }: { item: ScoredRun }) {
         <SimulatedTag />
       </div>
       <p className="mt-1 text-xs text-muted">Ask a second judge model to score this trajectory again. No network call is made in this prototype.</p>
-      <Button className="mt-2" icon={state === "running" ? undefined : ShieldCheck} onClick={go} disabled={state === "running"}>
-        {state === "running" ? <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
+      <Button className="mt-2" icon={ShieldCheck} loading={state === "running"} onClick={go} disabled={state === "running"}>
         {state === "running" ? "Re-judging" : "Re-judge with a second model"}
       </Button>
       <div aria-live="polite" className="mt-2">

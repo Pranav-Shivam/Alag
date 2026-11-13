@@ -275,7 +275,7 @@ export default function BehaviorSpecsTab({ stepId, onStepChange }: { stepId: num
           </Select>
         </div>
         <nav aria-label="Agents" className="hidden lg:block">
-          <ul className="sticky top-32 space-y-1">
+          <ul className="sticky top-20 space-y-1">
             {rows.map((r) => {
               const active = r.step.id === step.id;
               return (

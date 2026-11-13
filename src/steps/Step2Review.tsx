@@ -3,6 +3,8 @@ import type { KeyboardEvent } from "react";
 import { Bot } from "lucide-react";
 import type { CaseProps } from "../components/inspector/types";
 import { Card, SimulatedTag, relTime } from "../components/ui";
+import { toast } from "sonner";
+import { useGlobalLoader } from "../hooks/useGlobalLoader";
 import { useAgent, useCase, useStudio } from "../studio/store";
 import type { ExtractedField, QuotationCase } from "../studio/types";
 import type { Quotation } from "../types";
@@ -46,6 +48,7 @@ function Review({ quotation, c }: { quotation: Quotation; c: QuotationCase }) {
   const [viewerOpen, setViewerOpen] = useState(true);
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const [running, setRunning] = useState(false);
+  useGlobalLoader(running, "Reading the files…");
   const [announce, setAnnounce] = useState("");
 
   const rowEls = useRef<Record<string, HTMLLIElement | null>>({});
@@ -176,6 +179,7 @@ function Review({ quotation, c }: { quotation: Quotation; c: QuotationCase }) {
       setSelectedKey(null);
       setRunning(false);
       setAnnounce(`Extraction finished with ${list.length} fields.`);
+      toast.success("Extraction finished", { description: `${list.length} fields read from the files.` });
     }, simulatedDelay());
   };
 

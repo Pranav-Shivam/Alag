@@ -223,17 +223,17 @@ export default function QuotationsPage({ quotations, selectedId, onOpen }: Props
           {/* Laptop: table */}
           <div className="hidden overflow-hidden rounded-xl border border-line bg-surface shadow-sm md:block">
             <table className="w-full table-fixed text-left text-sm">
-              <thead className="border-b border-line bg-surface-2 text-xs uppercase tracking-wide text-muted">
+              <thead className="table-head border-b border-line bg-surface-2">
                 <tr>
-                  <th scope="col" className="w-[9%] px-3 py-3 font-medium">Quote ID</th>
-                  <th scope="col" className="w-[11%] px-3 py-3 font-medium">Customer</th>
-                  <th scope="col" className="w-[12%] px-3 py-3 font-medium">Product</th>
-                  <th scope="col" className="w-[10%] px-3 py-3 font-medium">Material · Region</th>
-                  <th scope="col" className="w-[10%] px-3 py-3 text-right font-medium">Value</th>
-                  <th scope="col" className="w-[8%] px-3 py-3 font-medium">Estimator</th>
-                  <th scope="col" className="w-[9%] px-3 py-3 font-medium">Received</th>
-                  <th scope="col" className="w-[18%] px-3 py-3 font-medium">Current step</th>
-                  <th scope="col" className="w-[11%] px-3 py-3 font-medium">Outcome</th>
+                  <th scope="col" className="w-[9%] px-3 py-3">Quote ID</th>
+                  <th scope="col" className="w-[11%] px-3 py-3">Customer</th>
+                  <th scope="col" className="w-[12%] px-3 py-3">Product</th>
+                  <th scope="col" className="w-[10%] px-3 py-3">Material · Region</th>
+                  <th scope="col" className="w-[10%] px-3 py-3 text-right">Value</th>
+                  <th scope="col" className="w-[8%] px-3 py-3">Estimator</th>
+                  <th scope="col" className="w-[9%] px-3 py-3">Received</th>
+                  <th scope="col" className="w-[18%] px-3 py-3">Current step</th>
+                  <th scope="col" className="w-[11%] px-3 py-3">Outcome</th>
                   <th scope="col" className="w-[2%] py-3 pr-3">
                     <span className="sr-only">Open</span>
                   </th>
@@ -251,7 +251,7 @@ export default function QuotationsPage({ quotations, selectedId, onOpen }: Props
                       onKeyDown={(e) => rowKeyDown(e, () => onOpen(q.id))}
                       className={
                         "group cursor-pointer align-top transition-colors focus-visible:-outline-offset-2 " +
-                        (selected ? "bg-warn-soft shadow-[inset_3px_0_0_0_var(--accent)]" : "hover:bg-surface-2")
+                        (selected ? "bg-accent/10 shadow-[inset_3px_0_0_0_var(--accent)]" : "hover:bg-surface-2")
                       }
                     >
                       <td className="px-3 py-3">
@@ -304,7 +304,7 @@ export default function QuotationsPage({ quotations, selectedId, onOpen }: Props
                     className={
                       "block w-full rounded-xl border p-4 text-left shadow-sm transition-colors " +
                       (selected
-                        ? "border-accent bg-warn-soft"
+                        ? "border-accent bg-accent/10"
                         : "border-line bg-surface hover:bg-surface-2 active:bg-surface-2")
                     }
                   >

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, CircleCheck, CircleX, FlaskConical, LoaderCircle, Play, ShieldAlert, ShieldCheck } from "lucide-react";
+import { ArrowRight, CircleCheck, CircleX, FlaskConical, Play, ShieldAlert, ShieldCheck } from "lucide-react";
 import { Button, Callout, Card, Chip, SectionTitle, SimulatedTag, TONE_SOLID, TONE_TEXT, relTime } from "../ui";
 import type { Tone } from "../ui";
 import { agentStats } from "../../studio/evalCalc";
@@ -153,8 +153,7 @@ export default function Suites({ runs, rules, scored, scoring, onOpenRun }: Prop
               </p>
 
               <div className="mt-auto flex flex-wrap items-center gap-2 pt-3">
-                <Button icon={isRunning ? undefined : Play} onClick={() => start(suite.id)} disabled={isRunning} aria-label={isRunning ? undefined : `Run suite ${suite.name}`}>
-                  {isRunning ? <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
+                <Button icon={Play} loading={isRunning} onClick={() => start(suite.id)} disabled={isRunning} aria-label={isRunning ? undefined : `Run suite ${suite.name}`}>
                   {isRunning ? "Running" : "Run suite"}
                 </Button>
                 <SimulatedTag />

@@ -97,6 +97,12 @@ export function toSnakeCase(raw: string): string {
     .replace(/[^a-z0-9_]/g, "");
 }
 
+/** Label for a schema field name. A unit suffix becomes a bracketed unit, so length_in reads "Length (in)". */
+export function fieldLabel(name: string): string {
+  const m = name.match(/^(.+)_(in|ft|mm|cm)$/);
+  return m ? `${humanize(m[1])} (${m[2]})` : humanize(name);
+}
+
 export function humanize(name: string): string {
   const s = name.replace(/_/g, " ").trim();
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;

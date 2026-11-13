@@ -265,7 +265,7 @@ function WorkflowBody({ quotation, quotations, onSelect, onBack }: Props & { quo
       <div className="lg:grid lg:grid-cols-[20rem_minmax(0,1fr)] lg:items-start lg:gap-5">
         <aside
           aria-label="Workflow"
-          className="min-w-0 rounded-xl border border-line bg-surface p-2 shadow-xs lg:sticky lg:top-[7.5rem] lg:max-h-[calc(100dvh-8.5rem)] lg:overflow-y-auto"
+          className="min-w-0 rounded-xl border border-line bg-surface p-2 shadow-xs lg:sticky lg:top-20 lg:max-h-[calc(100dvh-6.5rem)] lg:overflow-y-auto"
         >
           <div className="px-2 pb-2 pt-1">
             <h2 className="text-sm font-semibold text-ink">Workflow steps</h2>
@@ -275,7 +275,7 @@ function WorkflowBody({ quotation, quotations, onSelect, onBack }: Props & { quo
         </aside>
 
         {isDesktop ? (
-          <div className="min-w-0 overflow-hidden rounded-xl border border-line bg-surface shadow-xs lg:sticky lg:top-[7.5rem] lg:h-[calc(100dvh-8.5rem)] lg:min-h-[28rem]">
+          <div className="min-w-0 overflow-hidden rounded-xl border border-line bg-surface shadow-xs lg:sticky lg:top-20 lg:h-[calc(100dvh-6.5rem)] lg:min-h-[28rem]">
             {dismissed ? (
               <div className="grid h-full place-items-center p-8 text-center">
                 <div>

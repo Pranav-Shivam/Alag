@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { CircleCheck, CircleX, GitCompare, LoaderCircle, Play } from "lucide-react";
+import { CircleCheck, CircleX, GitCompare, Play } from "lucide-react";
+import AppLoader from "../common/AppLoader";
 import { estimateTokens } from "../../studio/calc";
 import type { AgentBody } from "../../studio/types";
 import { Button, Callout, Card, Chip, SectionTitle, SimulatedTag, TextArea } from "../ui";
 import { sideBySide } from "./diff";
+import { humanize } from "./logic";
+import { PromptView, StructuredOutput } from "./ResponseView";
 import { sampleFor, simulate } from "./simulate";
 import type { SimResult } from "./simulate";
 
@@ -48,12 +51,7 @@ function Metrics({ r }: { r: SimResult }) {
 }
 
 function Prompt({ r }: { r: SimResult }) {
-  return (
-    <details className="rounded-lg border border-line bg-surface-2">
-      <summary className="min-h-9 cursor-pointer select-none px-3 py-2 text-xs font-medium text-ink-2">Rendered prompt, about {estimateTokens(r.prompt)} tokens</summary>
-      <pre className="max-h-64 overflow-auto whitespace-pre-wrap break-words border-t border-line p-3 font-mono text-xs leading-relaxed text-ink">{r.prompt}</pre>
-    </details>
-  );
+  return <PromptView prompt={r.prompt} tokens={estimateTokens(r.prompt)} />;
 }
 
 function SingleResult({ title, r }: { title: string; r: SimResult }) {
@@ -67,9 +65,7 @@ function SingleResult({ title, r }: { title: string; r: SimResult }) {
       <Prompt r={r} />
       <div>
         <p className="mb-1 text-xs font-medium text-ink-2">Output</p>
-        <pre tabIndex={0} aria-label={`${title} output`} className="max-h-80 overflow-auto whitespace-pre-wrap break-words rounded-lg border border-line bg-surface-2 p-3 font-mono text-xs leading-relaxed text-ink">
-          {r.output}
-        </pre>
+        <StructuredOutput output={r.output} label={`${title} output`} />
       </div>
       <Checks checks={r.checks} />
     </Card>
@@ -155,7 +151,7 @@ export default function TestPanel({ stepName, live, draft }: Props) {
         {body.variables.length === 0 ? <p className="text-sm text-muted">This agent has no variables, so there is nothing to fill in.</p> : null}
         {body.variables.map((v) => {
           const value = values[v];
-          return <TextArea key={v} label={v} rows={value.length > 70 || value.includes("\n") ? 3 : 1} value={value} onChange={(e) => setEdited((p) => ({ ...p, [v]: e.target.value }))} className="resize-y font-mono text-xs" />;
+          return <TextArea key={v} label={humanize(v)} rows={value.length > 70 || value.includes("\n") ? 3 : 1} value={value} onChange={(e) => setEdited((p) => ({ ...p, [v]: e.target.value }))} className="resize-y text-sm" />;
         })}
       </Card>
 
@@ -175,7 +171,7 @@ export default function TestPanel({ stepName, live, draft }: Props) {
       <div aria-live="polite" aria-busy={!!running}>
         {running ? (
           <div className="flex items-center gap-2 rounded-lg border border-line bg-surface-2 p-3 text-sm text-ink-2">
-            <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" />
+            <AppLoader variant="icon" size="xs" />
             Running a simulated test
           </div>
         ) : outcome ? (

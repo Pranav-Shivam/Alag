@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ArrowDownToLine, FileSearch, ListChecks, LoaderCircle, MailQuestionMark, Play, RotateCcw, TriangleAlert, CircleCheck } from "lucide-react";
+import { HighlightedText } from "../../components/agent/ResponseView";
+import { ArrowDownToLine, FileSearch, ListChecks, MailQuestionMark, Play, RotateCcw, TriangleAlert, CircleCheck } from "lucide-react";
 import { Button, Callout, Card, SimulatedTag, TextArea } from "../../components/ui";
 
 /** Shown when the agent has not read the files yet. */
@@ -14,7 +15,7 @@ export function NotRunState({ running, fileCount, onRun }: { running: boolean; f
         The agent has not read the attachments for this quotation, so there are no fields to review. Run the extraction to get a first reading, then check what it found.
       </p>
       <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-        <Button variant="primary" icon={running ? LoaderCircle : Play} onClick={onRun} disabled={running || fileCount === 0} className={running ? "[&>svg]:animate-spin" : ""}>
+        <Button variant="primary" icon={Play} loading={running} onClick={onRun} disabled={running || fileCount === 0}>
           {running ? "Reading the files" : "Run extraction"}
         </Button>
         <SimulatedTag />
@@ -57,7 +58,7 @@ export function FailedState({ reason, prompt, running, fileCount, hasDraft, draf
           <TextArea label="Instruction for this run" rows={3} value={instruction} onChange={(e) => setInstruction(e.target.value)} hint="This instruction applies to this run only and does not change the agent." />
           <details className="rounded-lg border border-line bg-surface-2 p-2">
             <summary className="cursor-pointer text-xs font-medium text-ink-2">View the live extraction prompt (read only)</summary>
-            <pre className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-md bg-surface p-2 text-xs leading-relaxed text-ink-2">{prompt?.trim() ? prompt : "The agent has no extraction prompt set."}</pre>
+            <p className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-md bg-surface p-2 text-sm leading-relaxed text-ink-2">{prompt?.trim() ? <HighlightedText text={prompt} /> : "The agent has no extraction prompt set."}</p>
             <p className="mt-1.5 text-xs text-muted">
               To change the prompt for every quotation,{" "}
               <button type="button" onClick={onEditAgent} className="font-medium text-accent-fg underline underline-offset-2 hover:text-accent-hover">
@@ -67,7 +68,7 @@ export function FailedState({ reason, prompt, running, fileCount, hasDraft, draf
             </p>
           </details>
           <div className="flex flex-wrap items-center gap-2">
-            <Button variant="primary" icon={running ? LoaderCircle : Play} onClick={() => onRerun(instruction)} disabled={running || fileCount === 0} className={running ? "[&>svg]:animate-spin" : ""}>
+            <Button variant="primary" icon={Play} loading={running} onClick={() => onRerun(instruction)} disabled={running || fileCount === 0}>
               {running ? "Reading the files" : "Re-run extraction"}
             </Button>
             <SimulatedTag />

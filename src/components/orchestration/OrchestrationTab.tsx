@@ -311,7 +311,7 @@ function EventBus() {
           })}
         </ul>
 
-        <Card className="h-fit p-4 lg:sticky lg:top-32">
+        <Card className="h-fit p-4 lg:sticky lg:top-20">
           <SectionTitle title={event.name} hint={`${event.consumerSteps.length} ${event.consumerSteps.length === 1 ? "consumer" : "consumers"} receive this event independently`} />
           <div className="mt-3" aria-live="polite">
             <EventFanOut key={event.name} event={event} />

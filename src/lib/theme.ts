@@ -14,20 +14,22 @@ function readStored(): ThemeMode {
   }
 }
 
-function apply(mode: ThemeMode) {
+function apply(mode: ThemeMode): boolean {
   const dark = mode === "dark" || (mode === "system" && query().matches);
   document.documentElement.classList.toggle("dark", dark);
+  return dark;
 }
 
 /** Light / dark / system. System follows the OS setting live. Choice is saved in localStorage. */
 export function useTheme() {
   const [mode, setModeState] = useState<ThemeMode>(readStored);
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"));
 
   useEffect(() => {
-    apply(mode);
+    setDark(apply(mode));
     if (mode !== "system") return;
     const mq = query();
-    const onChange = () => apply("system");
+    const onChange = () => setDark(apply("system"));
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, [mode]);
@@ -41,5 +43,5 @@ export function useTheme() {
     setModeState(next);
   }, []);
 
-  return { mode, setMode };
+  return { mode, dark, setMode };
 }
