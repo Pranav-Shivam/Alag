@@ -96,58 +96,58 @@
 :root {
   color-scheme: light;
 
-  /* ALAG palette (light): indigo brand, amber call-to-action. */
-  --canvas: #f6f7fb;
+  /* ALAG palette (light): teal brand, tomato call-to-action. */
+  --canvas: #f7f5fa;
   --surface: #ffffff;
-  --surface-2: #f6f7fb;
-  --shell: #eef0f7; /* app shell behind header and footer */
-  --line: #e3e6f0;
-  --line-strong: #cdd2e3;
-  --ink: #0b1020;
-  --ink-2: #343b52;
-  --muted: #596079; /* 4.5:1 or better on canvas */
-  --accent: #3730a3; /* primary: indigo */
-  --accent-hover: #2e2784;
-  --accent-fg: #3730a3;
+  --surface-2: #f7f5fa;
+  --shell: #efecf4; /* app shell behind header and footer */
+  --line: #e6e2ee;
+  --line-strong: #d0cadb;
+  --ink: #13111a;
+  --ink-2: #3b3745;
+  --muted: #5f5a6b; /* 4.5:1 or better on canvas */
+  --accent: #2d8b76; /* primary: jungle teal */
+  --accent-hover: #247060;
+  --accent-fg: #1f6b59;
   --on-accent: #ffffff;
-  --ring: #4f46e5;
+  --ring: #2d8b76;
 
-  /* Sidebar. Same deep indigo in both themes. */
-  --brand: #1e1b4b;
+  /* Sidebar. Same deep teal in both themes. */
+  --brand: #12382f;
   --on-brand: #ffffff;
 
-  /* Primary call-to-action (token name `mint` is historical): amber fill, dark text. */
-  --mint: #fbbf24;
-  --mint-hover: #f5ae0b;
-  --mint-fg: #1c1303;
+  /* Primary call-to-action (token name `mint` is historical): tomato fill, dark text. */
+  --mint: #f26440;
+  --mint-hover: #e5532d;
+  --mint-fg: #2a0a02;
 
   /* Brand loader and logo tile. The tile is white in both themes. */
   --tile: #ffffff;
   --on-tile: #0b1020; /* ink on the always-white tile */
-  --loader-accent: #fbbf24;
-  --loader-accent-deep: #d97706;
+  --loader-accent: #f26440;
+  --loader-accent-deep: #ad2b0b;
   --overlay: rgb(0 0 0 / 0.45); /* modal mask */
 
   /* Status colors: ok = Completed, warn = Review, danger = Rejected, info = Open, violet = Assigned. */
-  --ok-soft: #e2f7ec;
-  --ok-fg: #187d3f;
-  --ok-line: #acdec0;
-  --ok-solid: #047857;
+  --ok-soft: #f0f9f7;
+  --ok-fg: #1f6b59;
+  --ok-line: #65cdb6;
+  --ok-solid: #2d8b76;
 
-  --warn-soft: #fff4dd;
-  --warn-fg: #8a5500;
-  --warn-line: #f5d8a3;
-  --warn-solid: #b45309;
+  --warn-soft: #fdefed;
+  --warn-fg: #ad2b0b;
+  --warn-line: #f7b5a3;
+  --warn-solid: #c4401d;
 
-  --alert-soft: #fff7ed;
-  --alert-fg: #9a3412;
-  --alert-line: #fdba74;
-  --alert-solid: #c2410c;
+  --alert-soft: #fdefed;
+  --alert-fg: #ad2b0b;
+  --alert-line: #f26440;
+  --alert-solid: #ad2b0b;
 
-  --danger-soft: #fce6e9;
-  --danger-fg: #b12535;
-  --danger-line: #f4bbc2;
-  --danger-solid: #b91c1c;
+  --danger-soft: #fdedef;
+  --danger-fg: #aa0e1b;
+  --danger-line: #f7a1a9;
+  --danger-solid: #aa0e1b;
 
   --info-soft: #e8f1ff;
   --info-fg: #114a93;
@@ -159,10 +159,10 @@
   --violet-line: #d3c1f8;
   --violet-solid: #6d28d9;
 
-  --teal-soft: #f0fdfa;
-  --teal-fg: #115e59;
-  --teal-line: #5eead4;
-  --teal-solid: #0f766e;
+  --teal-soft: #f0f9f7;
+  --teal-fg: #1f6b59;
+  --teal-line: #65cdb6;
+  --teal-solid: #2d8b76;
 
   /* Shape and elevation (values behind the radius-* and shadow-* theme names). */
   --r-chip: 0.375rem; /* tags, small badges, tiny bars */
@@ -175,64 +175,64 @@
   --page-max: 90rem;
 
   /* Data-viz palette (light). */
-  --chart-1: #4f46e5;
-  --chart-2: #d97706;
-  --chart-3: #0f766e;
+  --chart-1: #2d8b76;
+  --chart-2: #f26440;
+  --chart-3: #2563eb;
   --chart-4: #7c3aed;
-  --chart-5: #be123c;
+  --chart-5: #aa0e1b;
 }
 
 .dark {
   color-scheme: dark;
 
   /* ALAG palette (dark). */
-  --canvas: #181a2e;
-  --surface: #0f1120;
-  --surface-2: #181a2e;
-  --shell: #0f1120;
-  --line: #2b2e48;
-  --line-strong: #3d4160;
+  --canvas: #17151c;
+  --surface: #100e14;
+  --surface-2: #17151c;
+  --shell: #100e14;
+  --line: #2e2a38;
+  --line-strong: #413c50;
   --ink: #ffffff;
-  --ink-2: #d4d7e6;
-  --muted: #9aa0bd;
-  --accent: #a5b4fc; /* high contrast on the dark surface */
-  --accent-hover: #c7d2fe;
-  --accent-fg: #a5b4fc;
-  --on-accent: #0f1120;
-  --ring: #fbbf24;
+  --ink-2: #d9d5e2;
+  --muted: #a09bb0;
+  --accent: #65cdb6; /* high contrast on the dark surface */
+  --accent-hover: #8fdecb;
+  --accent-fg: #65cdb6;
+  --on-accent: #0c1311;
+  --ring: #f26440;
 
-  --brand: #1a1747;
+  --brand: #0f2e27;
   --on-brand: #ffffff;
 
-  --mint: #5c3d00;
-  --mint-hover: #704a00;
-  --mint-fg: #ffd36b;
+  --mint: #6b2210;
+  --mint-hover: #7f2a14;
+  --mint-fg: #ffb7a3;
 
   --tile: #ffffff;
   --on-tile: #0b1020;
-  --loader-accent: #fbbf24;
-  --loader-accent-deep: #d97706;
+  --loader-accent: #f26440;
+  --loader-accent-deep: #ad2b0b;
   --overlay: rgb(0 0 0 / 0.45);
 
-  --ok-soft: #143e2b;
-  --ok-fg: #99ecbe;
-  --ok-line: #276747;
-  --ok-solid: #059669;
+  --ok-soft: #0f3a31;
+  --ok-fg: #9fe8d6;
+  --ok-line: #226b5a;
+  --ok-solid: #2d8b76;
 
-  --warn-soft: #4f3918;
-  --warn-fg: #ffdda0;
-  --warn-line: #7a5928;
-  --warn-solid: #d97706;
+  --warn-soft: #4a2216;
+  --warn-fg: #ffc0ad;
+  --warn-line: #7a3a26;
+  --warn-solid: #d9532f;
 
-  --alert-soft: rgb(249 115 22 / 0.14);
-  --alert-fg: #fdba74;
-  --alert-line: rgb(249 115 22 / 0.4);
-  --alert-solid: #ea580c;
+  --alert-soft: rgb(242 100 64 / 0.14);
+  --alert-fg: #ffb09c;
+  --alert-line: rgb(242 100 64 / 0.4);
+  --alert-solid: #f26440;
 
-  --danger-soft: #521e27;
-  --danger-fg: #ffb6bf;
-  --danger-line: #80313e;
-  --danger-solid: #dc2626;
+  --danger-soft: #4a1219;
+  --danger-fg: #ffb3ba;
+  --danger-line: #7d2330;
+  --danger-solid: #f04251;
 
   --info-soft: #1a314e;
   --info-fg: #a7cfff;
@@ -244,15 +244,15 @@
   --violet-line: #58437f;
   --violet-solid: #7c3aed;
 
-  --teal-soft: rgb(20 184 166 / 0.14);
-  --teal-fg: #5eead4;
-  --teal-line: rgb(20 184 166 / 0.4);
-  --teal-solid: #0d9488;
+  --teal-soft: rgb(101 205 182 / 0.14);
+  --teal-fg: #65cdb6;
+  --teal-line: rgb(101 205 182 / 0.4);
+  --teal-solid: #2d8b76;
 
   /* Data-viz palette (dark). */
-  --chart-1: #a5b4fc;
-  --chart-2: #fbbf24;
-  --chart-3: #5eead4;
+  --chart-1: #65cdb6;
+  --chart-2: #ff8a6b;
+  --chart-3: #93c5fd;
   --chart-4: #c4b5fd;
-  --chart-5: #fda4af;
+  --chart-5: #ff7c86;
 }
